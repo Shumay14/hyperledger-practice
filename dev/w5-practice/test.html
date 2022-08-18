@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Listener JS in Attribute</title>
+
+    <script>
+      function over(obj) {
+        obj.src = "./images/sss.jpg";
+      }
+
+      function out(obj) {
+        obj.src = "./images/curve.png";
+      }
+
+      document.write("<h1>Hello World</h1>");
+      document.write("<h1>Hello Everyone</h1>");
+      document.writeln("wtf");
+      console.log("Hello World Done");
+      console.log("hihihihi");
+
+      var who = prompt("Write your name", "sjy");
+      if (who == null) {
+        console.log("null");
+      } else if (who == "") {
+        console.log("else if");
+      } else {
+        console.log("else");
+      }
+
+      var who2 = confirm("wanna submit message?");
+
+      if (who2 == true) {
+        console.log("who2=true");
+      } else {
+        consoel.log("who2 else");
+      }
+
+      alert("Well Done!");
+    </script>
+  </head>
+  <body>
+    <h3>Mouse on here</h3>
+    <h1>Hello World!!!!!!!</h1>
+    <hr />
+    <!-- <img
+      src="./images/curve.png"
+      alt="IMG"
+      onmouseover="this.src='./images/sss.jpg'"
+      onmouseout="this.src='./images/macnchair.jpg'"
+    /> -->
+
+    <h2>here here here on mouse</h2>
+    <img
+      src="./images/sss.jpg"
+      alt="IMG"
+      onmouseover="over(this)"
+      onmouseout="out(this)"
+    />
+  </body>
+</html>
