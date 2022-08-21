@@ -1,0 +1,44 @@
+/* My Account page css */
+
+/* 이벤트 주면 탭부분 컬러 변경 */
+/* .giver__secondTap {
+        myaccount 누를 땐 소유한NFT 컬러 바꾸기
+    } */
+
+/* account 정보 내 상단 부분 아티스트 이름,단체 div */
+.account__simleInfo {
+  display: flex;
+  align-items: center;
+}
+
+/* account 정보 내 하단 부분 */
+.account__infoBody {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 70px;
+  margin: auto;
+  margin-bottom: 40px;
+}
+
+/* NFT 정보 틀 */
+.account__counts {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+/* NFT 정보 (소유한, 기부금액, 기부횟수 NFT)*/
+.count {
+  border: 1px solid rgb(23, 0, 150);
+  width: 20%;
+  height: 120px;
+  margin: auto;
+  margin: 30px;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+}

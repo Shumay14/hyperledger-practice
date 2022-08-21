@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html class="autoHeight" lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <link rel="shortcut icon" type="image/x-icon" href="img/DONATE.ico" />
+    <link rel="stylesheet" href="css/styles_profile.css" />
+    <title>Document</title>
+  </head>
+  <body class="home">
+    <!-- 상단 nav bar -->
+    <header class="nav">
+      <!-- 서비스명 및 로고  -->
+      <!-- 서비스명과 로고 클릭 시 메인 페이지로 이동 -->
+      <a class="nav__link" href="/">
+        <img src="../img/DONATE.ico" />
+        <span>AmaDo</span>
+      </a>
+      <!-- nav bar 메뉴들 -->
+      <ul class="nav__menu">
+        <!-- nav bar "HOME" 메뉴 버튼 -->
+        <!-- "Home" 클릭 시 메인 페이지로 이동 -->
+        <li class="nav__item">
+          <a class="nav__link" href="/">Home</a>
+        </li>
+        <!-- 모든 NFT 리스트 -->
+        <li class="nav__item">
+          <a class="nav__link" href="/donateNft">All NFTs</a>
+        </li>
+        <!-- nav bar "Gallery" 메뉴 버튼 -->
+        <li class="nav__item">
+          <a class="nav__link glow" href="/gallery">Gallery</a>
+        </li>
+        <!-- nav bar "Create NFT" 메뉴 버튼 -->
+        <li class="nav__item">
+          <a class="nav__link" href="/createNft">Create NFT</a>
+        </li>
+        <!-- nav bar "Log in" 메뉴 버튼 -->
+        <!-- Log in 클릭 시  메타마스크 연결-->
+        <li class="nav__item">
+          <a class="nav__link" href="/signUp">Log in</a>
+        </li>
+      </ul>
+    </header>
+    <main>
+      <!-- Go Back 버튼 -->
+      <div>
+        <button onClick="history.go(-1)" class="backButton">
+          <i class="fas fa-paint-brush fa-lg"><span>Go Back</span></i>
+        </button>
+      </div>
+      <div class="myProfile">나의 프로필 편집</div>
+      <!--main container-->
+      <div class="container">
+        <!--profile 사진부분 -->
+        <div>
+          <div class="text view-content">
+            <!-- main-content -->
+            <img id="imgPreview" src="" alt="Preview" />
+          </div>
+          <input type="file" id="myFileInput" onclick="profile()" />
+        </div>
+
+        <!--main button-->
+        <div style="text-align: center">
+          <a href="profile">
+            <input type="reset" class="colorBtn" value="취소" />
+          </a>
+          <input
+            type="button"
+            class="colorBtn"
+            value="변경사항저장"
+            onclick="submit()"
+          />
+        </div>
+
+        <div class="con main2 main-container">
+          <!--nickName-->
+          <div style="margin-bottom: 10px">닉네임</div>
+          <div class="input-group mb-3">
+            <div type="text" class="form-control" id="nickName"></div>
+          </div>
+          <!--email_addr-->
+          <div style="margin-bottom: 10px">이메일주소</div>
+          <div class="input-group">
+            <div type="text" class="form-control" id="emailAddr"></div>
+          </div>
+        </div>
+      </div>
+
+      <!--main button-->
+      <div style="text-align: center">
+        <a href="profile">
+          <input type="reset" class="colorBtn" value="취소" />
+        </a>
+        <input
+          type="button"
+          class="colorBtn"
+          value="변경사항저장"
+          onclick="submit()"
+        />
+      </div>
+    </main>
+    <!-- footer -->
+    <footer class="footer">
+      <div class="footer__div">
+        <div class="footer__menu">
+          <!-- 플랫폼 로고 이미지 -->
+          <ul class="footer__brandLogo">
+            <li class="footer__li">
+              <span>AmaDo</span>
+            </li>
+          </ul>
+          <!-- 플랫폼 대표 전화, 주소, 이메일 입력 -->
+          <ul class="footer__info">
+            <li class="footer__li">상담센터 <span>070-123-4567</span></li>
+            <li class="footer__li">대표전화 <span>02-123-4567</span></li>
+            <li class="footer__li">
+              주소
+              <span>서울특별시 영등포구 양산로 53 월드메르디앙 비즈센터</span>
+            </li>
+            <li class="footer__li">Email <span>ssjd6111@amado.com</span></li>
+          </ul>
+          <!-- sns 로고 -->
+          <ul class="footer__sns">
+            <li class="footer__li">
+              <span><i class="fab fa-twitter fa-2x"></i> </span
+              ><span><i class="fab fa-instagram fa-2x"></i></span>
+              <span><i class="fab fa-facebook-square fa-2x"></i></span>
+              <span><i class="fab fa-youtube fa-2x"></i></span>
+            </li>
+          </ul>
+        </div>
+        <!-- 플랫폼 copyrights 텍스트 -->
+
+        <div class="footer__copy">
+          <div class="footer__copyrights">@ AmaDo. All Rights Reserved.</div>
+        </div>
+      </div>
+    </footer>
+    <!-- javascript libraries -->
+    <script src="js/profile/edit_profile.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </body>
+</html>

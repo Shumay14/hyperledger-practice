@@ -1,0 +1,77 @@
+/* payment page css (artist and giver) */
+
+/* input number에 화살표 ui 없애기 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 오른쪽 파트 전체 div */
+.payment__donate {
+  width: auto;
+  height: 800px;
+}
+/* lable div */
+.payment__form {
+  display: flex;
+  width: auto;
+  height: 50%;
+  justify-content: center;
+  padding-bottom: 30px;
+  align-items: flex-end;
+}
+
+/* label 제목 */
+.payment__form label {
+  font-size: 20px;
+}
+
+/* 오른쪽 부분 이더리움 아이콘 */
+.payment__form i {
+  opacity: 0.7;
+  margin-left: 5px;
+}
+
+/* input box */
+#number {
+  width: 270px;
+  height: 35px;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+/* input 창 효과 */
+#number:focus {
+  /* input 창 아웃라인 (윗쪽) */
+  outline: 2px solid var(--pink);
+  /* input 창 border line */
+  border: var(--pink);
+  /* input 창 섀도우 */
+  box-shadow: 2px 2px 2px 2px var(--pink);
+}
+
+/* donate 버튼 div */
+.payment__formBtn {
+  width: auto;
+  height: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  align-items: flex-start;
+}
+
+/* donate 버튼 */
+.payment__Btn {
+  padding: 10px 20px;
+  height: 17%;
+  font-size: 26px;
+  color: white;
+  border-radius: 5px;
+  border-color: wheat;
+  text-shadow: 0px -2px rgba(0, 0, 0, 0.44);
+  background-color: var(--pink);
+  border-bottom: 7px solid #ff709c;
+  letter-spacing: 7px;
+}

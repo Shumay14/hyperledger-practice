@@ -1,0 +1,68 @@
+body {
+    /*브라우저폭에 5배 만큼을 말한다. _ 스크롤바*/
+    height: 500vw;
+    font-family: "Apple SD Gothic Neo", "Roboto", "Noto Sans KR", NanumGothic,
+        "Malgun Gothic", sans-serif;
+    -webkit-overflow-scrolling: touch;
+    color: #555;
+    background: #fff000;
+    transition: background 0.5s;
+}
+
+.gallery {
+    /*스크롤을하면 일반적인 페이지처럼 콘텐츠가 위로 올라가는 것이 아니라
+    앞에 그대로 있는 상태에서 앞,뒤로 왔다갔다 하는것이다.
+    그래서 공간자체가 스크롤을 올리더라도 그대로 우리 눈앞에 남아있어야한다.
+    따라서  gallery자체는 position:fixed로 고정되어있다. 
+    왜? position이 fixed가 아니면 위로 올라가버리기 때문이다.*/
+    position: fixed;
+    left: 0;
+    top: 0;
+    /*브라우저 영역이 꽉 차게끔해준다.*/
+    width: 100vw;
+    height: 100vh;
+    /* 공간자체를 3차원 공간속성으로 바꿔서 넣어줘야된다.
+ -> 이것이 바로 perspectiove 적용시, 원근이 적용되는것이다.*/
+    perspective: 1000px;
+}
+
+/*실제로 하얀 3d벽들을 포함하고있는 class는 house이지만, class-stage를 넣어서 
+class-house에 3d벽들이 배치가 되고, 캐릭터가 집 앞이나 집 옆에의 개념으로써 
+캐릭터랑 집을 같이 감쌀 컨테이너가 필요해서 그 역할로써 stage를 만든것이다.  */
+.stage {
+    /*position은 다른데 크게 영향을 안주도록 absolute를 주었다.*/
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    /*transform-style:preserve-3d 를 주는 이유는, .gallery 에다가 perspective를 줘서 아래있는
+  영역들이 다 3d효과가 잘 적용되도록 해준것인데, 그 안에 중간에 걸친 elem들에게  transform-style:preserve-3d;
+  라는 속성을 세팅을 해줘야 제일 안에있는 실제로 3d가 적용되어야 할 요소들까지 3d효과가 보존-전파된다.
+  
+  즉, 정리하자면 ? 
+  실제로 3d효과가 적용되야할 요소들은 벽, 캐릭터 이고, 중간에 .stage, .house 컨테이너들이 
+  껴있다. 따라서 gallery에서 .stage, .house 를 거쳐서 wall이랑 캐릭터까지 3d효과가 잘 적용되게 하기 위해서는 ?
+  transform-style:preserve-3d;를 줘야한다는 얘기였다.*/
+    transform-style: preserve-3d;
+}
+
+.house {
+    /*house 벽 또한 꽉 차게해주기위해 아래와같이 설정.*/
+    width: 100vw;
+    height: 100vh;
+    /*zoom아웃 효과*/
+    transform: translateZ(-490vw);
+    transform-style: preserve-3d;
+}
+
+.goHomeBtn {
+    font-size: 30px;
+    color: white;
+    width: 150px;
+    height: 150px;
+    align-items: center;
+    margin: auto;
+    border-radius: 50%;
+    background-color: var(--pink);
+}

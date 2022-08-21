@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Here is Login Page</title>
+    <script src="../server.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js">
+      var obj = document.getElementById("test-btn");
+
+      $("#test-btn").click();
+    </script>
+  </head>
+  <body>
+    <h1>Need to Login</h1>
+    <!-- html form 테그에서는 json으로 바꿔서 리퀘스트 보냄 -->
+    <form method="post" action="/login/user">
+      <label>ID : </label>
+      <input type="text" name="id" id="" />
+      <br />
+      <label>PW : </label>
+      <input type="password" name="pw" id="" />
+      <br />
+      <br />
+      <input type="submit" name="submit" id="" value="Submit" />
+      <button type="text" id="test-btn"></button>
+    </form>
+  </body>
+</html>

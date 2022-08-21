@@ -1,0 +1,7 @@
+Metadata of "ierc721" was published successfully.
+@openzeppelin/contracts/utils/introspection/IERC165.sol : 
+dweb:/ipfs/QmcsVgLgzWdor3UnAztUkXKNGcysm1MPneWksF72AvnwBx
+@openzeppelin/contracts/token/ERC721/IERC721.sol : 
+dweb:/ipfs/QmPG2oeDjKncqsEeyYGjAN7CwAJmMgHterXGGnpzhha4z7
+metadata.json : 
+dweb:/ipfs/QmPJGfgDwYmRtbUhdnzE5ZA79GtgJwYAR9yiG8m1Jt2NXu

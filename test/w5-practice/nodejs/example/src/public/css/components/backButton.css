@@ -1,0 +1,20 @@
+/* "Go Home" or "Go Back" icon */
+
+.backButton {
+  border-style: none;
+  background: none;
+}
+
+.backButton i {
+  display: inline-block;
+  margin: 22px;
+  font-size: 20px;
+  color: var(--pink);
+}
+
+/* "Go Home" or "Go Back"텍스트 */
+.backButton span {
+  margin-left: 6px;
+  font-size: 13px;
+  color: var(--pink);
+}

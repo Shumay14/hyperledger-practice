@@ -1,0 +1,41 @@
+/* 폰트 스타일 (구글 폰트) */
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap");
+
+@import "reset.css";
+@import "variables.css";
+
+/* components - 희경 */
+@import "components/nav.css";
+@import "components/footer.css";
+@import "components/backButton.css";
+@import "components/myAccountNav.css";
+@import "components/payment.css";
+
+/* screens */
+@import "screens/main.css";
+@import "screens/donateNft.css";
+@import "screens/artInfo.css";
+@import "screens/myAccountGiver.css";
+@import "screens/myAccountArtist.css";
+@import "screens/owndedNft.css";
+@import "screens/signUp.css";
+@import "screens/paymentPlatform.css";
+
+.autoHeight {
+    /* 내용만큼 자동 스크롤 */
+    /* 메인화면 외 나머지 화면만 적용 */
+    /* overflow 적용할 때 height 값 유의해서 주기. height값이 작다면
+  overflow:auto;를 해도 height 만큼만 스크롤 생긴다. */
+    overflow: auto;
+}
+
+body {
+    box-sizing: border-box;
+    background-color: whitesmoke;
+    /* margin-top: 50px; */
+    display: flex;
+    flex-direction: column;
+    /* height: 10000px; */
+    font-family: "Baloo Paaji 2", "Noto Sans KR", sans-serif;
+}

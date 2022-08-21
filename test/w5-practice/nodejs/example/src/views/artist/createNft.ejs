@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="autoheight" lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+            crossorigin="anonymous"
+        />
+        <link rel="shortcut icon" type="image/x-icon" href="img/DONATE.ico" />
+        <link rel="stylesheet" href="css/styles3.css" />
+        <!-- file_pond_other html -->
+        <link
+            href="https://unpkg.com/filepond@^4/dist/filepond.css"
+            rel="stylesheet"
+        />
+        <!-- file_pond_Add plugin styles -->
+        <link
+            href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+            rel="stylesheet"
+        />
+        <title>Java Script</title>
+    </head>
+    <body class="home">
+        <!-- 상단 nav bar -->
+        <header class="nav">
+            <!-- 서비스명 및 로고  -->
+            <!-- 서비스명과 로고 클릭 시 메인 페이지로 이동 -->
+            <a class="nav__link" href="/">
+                <img src="../img/DONATE.ico" />
+                <span>AmaDo</span>
+            </a>
+            <!-- nav bar 메뉴들 -->
+            <ul class="nav__menu">
+                <!-- nav bar "HOME" 메뉴 버튼 -->
+                <!-- "Home" 클릭 시 메인 페이지로 이동 -->
+                <li class="nav__item">
+                    <a class="nav__link" href="/">Home</a>
+                </li>
+                <!-- 모든 NFT 리스트 -->
+                <li class="nav__item">
+                    <a class="nav__link" href="/donateNft">All NFTs</a>
+                </li>
+                <!-- nav bar "Gallery" 메뉴 버튼 -->
+                <li class="nav__item">
+                    <a class="nav__link glow" href="/gallery">Gallery</a>
+                </li>
+                <!-- nav bar "Create NFT" 메뉴 버튼 -->
+                <li class="nav__item">
+                    <a class="nav__link" href="/createNft">Create NFT</a>
+                </li>
+                <!-- nav bar "Log in" 메뉴 버튼 -->
+                <!-- Log in 클릭 시  메타마스크 연결-->
+                <li class="nav__item">
+                    <a class="nav__link" href="/signUp">Log in</a>
+                </li>
+            </ul>
+        </header>
+        <div>
+            <button onClick="history.go(-1)" class="backButton">
+                <i class="fas fa-paint-brush fa-lg"><span>Go Back</span></i>
+            </button>
+        </div>
+        <main class="__create__container">
+            <!-- Go Back 버튼 -->
+            <!-- Go Back 버튼 end -->
+            <div class="con second-container">
+                <!--new-nft start-->
+                <div
+                    calss="text"
+                    style="font-size: 30px; text-align: left; margin-top: 30px"
+                >
+                    새로운 NFT 발행하기
+                </div>
+                <!--main-container-->
+                <div class="con main-container">
+                    <form enctype="multipart/form-data">
+                        <div class="text file-upload" style="margin: 5px">
+                            파일 업로드<br />
+                            NFT에 넣을 이미지/영상 파일을 업로드해주세요.
+                        </div>
+                        <input type="file" />
+                        <div class="test">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-1"
+                                    >작 품 명</span
+                                ><br />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="inputGroup"
+                                    aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                />
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"
+                                    >작품 금액(ETH)</span
+                                ><br />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="eth-v"
+                                    aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                />
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">시리얼 넘버</span
+                                ><br />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="serialNumber"
+                                    aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                />
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-1"
+                                    >명언</span
+                                ><br />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="quotes"
+                                    aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                />
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text">작품설명</span>
+                                <textarea
+                                    class="form-control"
+                                    id="des"
+                                    aria-label="With textarea"
+                                ></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--third-container-->
+                <div class="third-container">
+                    <div class="text main-info">
+                        <!--첫번째 NFT발행 수집및 이용 정보-->
+                        <input
+                            class="check-text"
+                            type="checkbox"
+                            name="agree"
+                            value="checked"
+                        />
+                        NFT 발행을 위해 아래 정보를 수집 및 이용하는 것에
+                        동의합니다.<br />
+                        <div
+                            style="
+                                font-size: 15px;
+                                color: red;
+                                margin-left: 20px;
+                            "
+                        >
+                            아래 정보를 수집 및 이용하는 것에 동의해주세요.<br />
+                        </div>
+                        <div class="test-text-2">
+                            <div class="box-color-1">
+                                <br />
+                                -수집항목: NFT 이름, 설명, 파일(이미지 등)<br />
+                                -수집목적: NFT 발행 및 관리<br />
+                                -보유 및 이용기간 : 영구<br />
+                                -동의를 거부할 경우 NFT 발행할 수 없습니다.<br />
+                            </div>
+                        </div>
+                        <br /><br />
+                        <!--두번째 NFT발행 수집및 이용 정보-->
+                        <input
+                            class="check-text"
+                            type="checkbox"
+                            name="agree"
+                            value="checked"
+                        />
+                        본인은 아래 유의사항을 꼼꼼히 확인하였으며, 이를
+                        준수하는데 동의합니다.<br />
+                        <div
+                            style="
+                                font-size: 15px;
+                                color: red;
+                                margin-left: 20px;
+                            "
+                        >
+                            아래 정보를 수집 및 이용하는 것에 동의해주세요.<br />
+                        </div>
+                        <div class="test-text-2">
+                            <div class="box-color-2">
+                                1. 본인은 제3자의 지적재산권, 인권, 개인정보 등
+                                타인의 권리를 침해하지 않습니다.<br />
+                                2. 본인은 본인의 개인정보를 활용하는 경우 본인의
+                                개인정보가 제3자에게 공개, 활용, 제공, 등이 될
+                                수 있음을 <br />
+                                인지하며 이에 동의합니다.<br />
+                                3. NFT에 대한 모든 책임은 본인에게 있음을
+                                확인하고 동의합니다.<br />
+                                4. 본인의 NFT에 다른 아티스트의 작품을 업로드할
+                                경우 고지 없이 삭제될 수 있으며 해당 플랫폼
+                                추후에는 <br />사용할 수 없음을 인지했습니다.<br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="text-align: center">
+                    <input class="nftText__btn" type="reset" value="취소" />
+                    <input
+                        class="nftText__btn"
+                        type="button"
+                        value="NFT발행하기"
+                        onclick="submit();agreeBtn();"
+                    />
+                </p>
+            </div>
+        </main>
+
+        <!-- footer 제거-->
+
+        <!-- file_ponds_Add plugin scripts-->
+        <script
+            type="text/javascript"
+            src="https://kit.fontawesome.com/6478f529f2.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+        <!-- other html -->
+        <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+        <script src="js/artist/createNft.js"></script>
+    </body>
+</html>

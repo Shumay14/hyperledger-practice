@@ -1,0 +1,442 @@
+/* art(NFT) info 및 아티스트가 소유한 다양한 NFT page css*/
+
+.row {
+    display: flex;
+    width: auto;
+    height: 1000px;
+    margin-bottom: 200px;
+}
+/* left & right layout */
+.left {
+    height: auto;
+    width: 50%;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+.right {
+    height: auto;
+    width: 50%;
+    /* margin-top: 50px; */
+}
+
+/* card img background */
+.artInfo__cardImg {
+    display: flex;
+    background: url("https://uploads-ssl.webflow.com/60a9378b10cd7f43d5f02a9b/60b5254ae5ca5cc1674696e2_ezgif.com-gif-maker%20(14).gif");
+    width: 50%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    margin: 10% auto;
+    box-shadow: 7px 7px 7px 7px #534100;
+}
+
+/* NFT img */
+.artInfo__img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    box-shadow: 3px 3px 3px 3px rgb(27, 27, 27);
+}
+
+/* NFT img */
+.artInfo__img2 {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    box-shadow: 1px 1px 1px 1px rgba(27, 27, 27, 0.603);
+}
+
+/* NFT name, number, price, description and dontate Btn */
+.artInfo__textBox {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    object-fit: cover;
+}
+
+.artInfo__top {
+    display: flex;
+    align-items: center;
+}
+
+/* NFT 이름, number*/
+.artInfo__title {
+    width: 80%;
+    height: 80%;
+}
+
+/* NFT 이름 */
+.nftText__title {
+    font-size: 40px;
+    opacity: 0.7;
+}
+
+/* NFT number */
+.nftText__number {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.7);
+    margin-top: 5px;
+}
+
+.nftText__artist {
+    font-size: 15px;
+    margin-top: 5px;
+    color: #a5a2a2;
+}
+
+/* NFT 가격 div */
+.artInfo__price {
+    display: flex;
+    font-size: 32px;
+}
+
+/* 이더 아이콘 */
+/* .artInfo__price i {
+  margin-right: 7px;
+  color: #fd6588;
+   */
+.artInfo__price {
+    margin-right: 7px;
+}
+i {
+    color: #fd6588;
+}
+
+/* 작품 설명 타이틀 */
+.artInfo__description h5 {
+    font-weight: 600;
+    margin-top: 40px;
+}
+
+/* 작품 설명 텍스트 */
+.nftText__description {
+    max-width: 570px;
+}
+
+/* NFT 버튼 div*/
+.artInfo__btn {
+    text-align: center;
+    margin: 10px;
+}
+
+/* NFT 버튼 */
+.nftText__btn {
+    padding: 10px 15px;
+    margin-top: 30px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    border-radius: 5px;
+    border-color: wheat;
+    text-shadow: 0px -2px rgba(0, 0, 0, 0.44);
+    background-color: var(--pink);
+    border-bottom: 7px solid #ff709c;
+}
+
+/* artist 프로필 및 NFT */
+.artistProfile {
+    display: flex;
+    align-items: center;
+}
+
+/* artist 프로필 img */
+.artistProfile__img {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 5px 40px 5px 40px;
+}
+/* artist 이름 */
+.artistProfile__name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* artist 슬로건 */
+.artistProfile__info p {
+    /* padding: 25px; */
+    margin-top: 15px;
+}
+
+/* 아티스트가 발행한 NFT title 텍스트 위의 border line */
+.artist__nftList {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 90%;
+    margin: auto;
+    margin-top: 35px;
+}
+
+/* 아티스트가 발행한 NFT title 텍스트 */
+.artist__nftListTitle {
+    display: flex;
+    margin-top: 35px;
+    padding-left: 25px;
+    font-weight: bold;
+    font-size: large;
+}
+
+/* 아티스트가 소유한 NFT cards의 전체 border */
+.artist__nftCardsList {
+    width: 90%;
+    height: 65%;
+    margin: auto;
+}
+
+/* NFT가 들어갈 4개의 틀 (세로줄) */
+.ownedNftList {
+    width: 95%;
+    height: 23%;
+    margin: auto;
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* NFT 이미지 각각의 틀 */
+.ownedNftRow {
+    display: inline-block;
+    width: 20%;
+    height: 85%;
+    margin: 14px;
+}
+
+/* NFT 이미지 */
+.ownedNft {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/*add by.eunkyung*/
+#box {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    margin-top: 50px;
+}
+
+.card {
+    width: 100%;
+    max-width: 200px;
+    height: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 4px;
+    /* overflow: hidden; */
+    position: relative;
+    transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.card .thumb {
+    width: 100%;
+    /* height: max-content; */
+    object-fit: cover;
+    border-radius: 3px;
+    /* border: solid 3px blue; */
+}
+
+.card .infos {
+    /* border: solid 3px blue; */
+    top: -10px;
+    width: auto;
+    height: 100px;
+    position: relative;
+    padding: 15px 15px;
+    background: #fff;
+    -webkit-transition: 0.4s 0.15s cubic-bezier(0.17, 0.67, 0.5, 1.03);
+    transition: 0.4s 0.15s cubic-bezier(0.17, 0.67, 0.5, 1.03);
+    box-shadow: 1px 1px 1px 1px rgba(27, 27, 27, 0.603);
+}
+
+.card .infos .title {
+    position: relative;
+    margin: 5px 0 -10px;
+    letter-spacing: 2px;
+    color: rgba(0, 0, 0, 0.8);
+    font-family: "Roboto", sans-serif;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+}
+
+.card .infos .color {
+    position: absolute;
+    display: table;
+    top: 50px;
+    left: 180px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding: 5px;
+    width: 200px;
+    /* background-color: #aaa; */
+}
+
+.card .infos .composition {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: "Roboto", sans-serif;
+}
+
+.card .infos .type {
+    padding-top: 20px;
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.6);
+    font-family: "Roboto", sans-serif;
+}
+
+.card .infos .price {
+    margin-top: -8px;
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.4);
+    font-family: "Roboto", sans-serif;
+}
+
+.card .infos .code {
+    margin-top: -2px;
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.7);
+    font-family: "Roboto", sans-serif;
+}
+
+.card .infos .price {
+    display: block;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    -webkit-transition: 0.5s 0.25s cubic-bezier(0.17, 0.67, 0.5, 1.03);
+    transition: 0.5s 0.25s cubic-bezier(0.17, 0.67, 0.5, 1.03);
+}
+
+.card .infos .txt {
+    font-family: "Roboto", sans-serif;
+    line-height: 1.5;
+    font-size: 0.9rem;
+    white-space: wrap;
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    -webkit-transition: 0.5s 0.25s cubic-bezier(0.17, 0.67, 0.5, 1.03);
+    transition: 0.5s 0.25s cubic-bezier(0.17, 0.67, 0.5, 1.03);
+}
+
+.card .infos .details {
+    position: absolute;
+    left: 0;
+    left: 0;
+    bottom: 0;
+    margin: 10px 0;
+    padding: 35px 25px;
+    letter-spacing: 1px;
+    color: #555;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0;
+    -webkit-transition: 0.5s 0.25s cubic-bezier(0.17, 0.67, 0.5, 1.03);
+    transition: 0.5s 0.25s cubic-bezier(0.17, 0.67, 0.5, 1.03);
+}
+
+.card:hover .infos {
+    -webkit-transform: translateY(-30px);
+    transform: translateY(-30px);
+}
+.card:hover .infos .type,
+.card:hover .infos .txt,
+.card:hover .infos .details,
+.card:hover .infos .price,
+card:hover .infos .code {
+    opacity: 1;
+}
+
+.card .infos .details:hover {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (max-width: 600px) {
+    .card .infos .title {
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .card .infos .composition {
+        font-size: 0.77rem;
+        padding-bottom: 5px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .card .infos .color {
+        left: 180px;
+    }
+}
+
+/* modal */
+.open-link {
+    display: none;
+}
+/* 텍스트와 버튼 감싸는 div */
+#addressChk {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid var(--pink);
+    border-radius: 4px;
+    width: 420px;
+    height: 250px;
+}
+
+/* 텍스트 */
+.artInfo__p {
+    color: black;
+    margin: 25px;
+    padding: 15px;
+}
+
+/* 텍스트 내에 첫번째 텍스트 */
+.artInfo__p :first-child {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+/* 텍스트 내에 마지막 텍스트 */
+.artInfo__p:last-child {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* 화면 가운데 */
+.overlay2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+/* 버튼 */
+.artInfo__p2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.artInfo__p2 .chkBtn {
+    border-style: none;
+    background-color: var(--pink);
+    color: white;
+    border-radius: 5px;
+    margin: 30px;
+    padding: 8px 18px;
+    font-size: 18px;
+}

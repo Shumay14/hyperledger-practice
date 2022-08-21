@@ -1,0 +1,19 @@
+/*회색 바*/
+.progress-bar-con {
+    /*스크롤 됐을때 위로 올라가버리면안되니까, fixed를 준다.*/
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 5px;
+    /*bar가 깔려있으므로, 위로 꺼내준다.*/
+    z-index: 100;
+    background: #555;
+}
+/*파랑색 바*/
+.progress-bar {
+    /*초기값 0 부터 시작 -> 스크롤할때마다 파랑색으로 왔다갔다한다.*/
+    width: 0;
+    height: 100%;
+    background: #00a8ff;
+}

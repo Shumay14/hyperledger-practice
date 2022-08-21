@@ -1,0 +1,116 @@
+/* My Account page에서 중복되는 부분 (아티스트/기부자) */
+
+/* My Account 탭*/
+
+/* My Account page 내 상단 nav bar */
+/* nav bar 틀 */
+.account__nav {
+  display: flex;
+  width: 90%;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #170096;
+  background-color: #170096;
+  margin: auto;
+}
+
+/* nav bar 탭 */
+.account__tap {
+  display: flex;
+  margin-left: auto;
+}
+
+/* nav bar 내 텍스트를 감싼 li */
+.account__account {
+  padding: 20px;
+}
+
+/* nav bar 내 텍스트 */
+.account__link {
+  color: white;
+  font-size: 17px;
+}
+
+/* account 정보 */
+.account__info {
+  border: 1px solid rgba(23, 0, 150, 0.4);
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+/* account 정보 내 상단 부분 (div 상/하단으로 구분) */
+.account__infoTitle {
+  display: flex;
+  align-items: center;
+}
+
+/* account 정보 내 상단 부분 이미지 border*/
+.account__infoImg {
+  width: 200px;
+  height: 150px;
+  margin: 30px;
+  margin-left: 50px;
+  margin-top: 40px;
+}
+
+/* account 정보 내 상단 부분 이미지 */
+.account__infoImg img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* account 정보 내 상단 부분 아티스트 이름 */
+.account__infoName {
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+/* account 정보 내 상단 부분 내 이메일, 웹사이트 */
+.account__moreInfo {
+  margin: 10px 0 0 0;
+}
+
+/* account 정보 내 상단 부분 내 이메일 */
+.account__infoMail {
+  margin-bottom: 5px;
+}
+
+/* account 정보 내 하단 부분 내 지갑주소*/
+.walletAddress {
+  width: 50%;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+/* account 정보 내 하단 부분 내 개인정보 수정 버튼*/
+.editPersonalInfo__btn {
+  display: flex;
+  width: 50%;
+  justify-content: flex-end;
+}
+
+/* account 정보 내 하단 부분 내 개인정보 수정 버튼*/
+.editPersonalInfo__btn button {
+  border-radius: 20px;
+  border: 1px solid var(--navy);
+  background-color: var(--navy);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+.editPersonalInfo__btn button:active {
+  transform: scale(0.95);
+}
+
+.editPersonalInfo__btn button:focus {
+  outline: none;
+}

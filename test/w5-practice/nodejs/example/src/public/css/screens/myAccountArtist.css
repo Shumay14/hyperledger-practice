@@ -1,0 +1,39 @@
+/* My Account page css */
+
+/* account 정보 내 상단 부분 아티스트 이름,단체 div */
+.account__simleInfo {
+  display: flex;
+  align-items: center;
+}
+
+/* account 정보 내 하단 부분 */
+.account__infoBody {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 70px;
+  margin: auto;
+  margin-bottom: 40px;
+}
+
+/* NFT 정보 틀 */
+.account__counts {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+/* NFT 정보 (발행한, 판매된 NFT)*/
+.count {
+  border: 1px solid rgb(23, 0, 150);
+  width: 20%;
+  height: 120px;
+  margin: auto;
+  margin: 30px;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+}

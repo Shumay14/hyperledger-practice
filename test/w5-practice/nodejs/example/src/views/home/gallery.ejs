@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/DONATE.ico" />
+        <link rel="stylesheet" href="css/styles2.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--google_font-->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+            rel="stylesheet"
+        />
+        <title>Gallery</title>
+    </head>
+    <body onload="getArtList();">
+        <!--회색 막대기-->
+        <div class="progress-bar-con">
+            <!--하늘색 막대기-->
+            <div class="progress-bar"></div>
+        </div>
+        <!--최상위클래스-->
+        <div class="gallery">
+            <!--stage-->
+            <div class="stage">
+                <!--레드카펫 그리고, 버튼 누르면 홈으로 나가기 -->
+                <div>
+                    <button class="goHomeBtn" onclick="location.href='/'">
+                        GoHome
+                    </button>
+                </div>
+                <!-- house -->
+                <div class="house">
+                    <!--왼쪽벽-->
+                    <section class="wall wall-left">
+                        <div class="wall-grid-items">
+                            <!-- 자바스크립트 그리기 영역 -->
+                            <!-- 자바스크립트 그리기 영역 -->
+                            <!-- 자바스크립트 그리기 영역 -->
+                        </div>
+                    </section>
+                    <!--왼쪽벽 끝-->
+                    <!--오른쪽 벽 -->
+                    <section class="wall wall-right">
+                        <div class="wall-grid-items2">
+                            <!-- 자바스크립트 그리기 영역 -->
+                            <!-- 자바스크립트 그리기 영역 -->
+                            <!-- 자바스크립트 그리기 영역 -->
+                        </div>
+                    </section>
+                    <!--오른쪽 벽  끝-->
+
+                    <!--3개 콘텐트중 1번째-->
+                    <section class="wall wall-front wall-front-a">
+                        <!-- 인물 -->
+                        <div class="wall-content">
+                            <h2 class="wall-title">Art,<br />Portrait</h2>
+                        </div>
+                    </section>
+                    <!--3개 콘텐트중 2번째-->
+                    <section class="wall wall-front wall-front-b">
+                        <div class="wall-content">
+                            <h2 class="wall-title">Art,<br />Character</h2>
+                        </div>
+                    </section>
+                    <!--3개 콘텐트중 3번째-->
+                    <section class="wall wall-front wall-front-d">
+                        <div class="wall-content">
+                            <h2 class="wall-title">
+                                <video
+                                    class="video"
+                                    src="./video/video.mp4"
+                                    autoplay
+                                    muted
+                                    loop
+                                ></video>
+                                <canvas class="canvas" width="1200" height="900"
+                                    >이 브라우/저는 캔버스를 지원하지 않습니다.
+                                </canvas>
+                            </h2>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!--modal start-->
+        <div class="open-link pointer-lock-close overlay">
+            <div id="foo">
+                <button class="close" onclick="removeF()">×</button>
+                <h3>Open External Link</h3>
+                <p>»&nbsp;<span class="url">All NFTs</span></p>
+                <p>
+                    <a class="button" target="_blank" href="donateNft">Open</a>
+                </p>
+            </div>
+        </div>
+        <!--modal end-->
+
+        <!-- import libraries  -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="js/home/wall3d.js"></script>
+        <script src="js/home/video.js"></script>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+/*4개 콘텐트 모두 같은 사이즈용 적용시키기*/
+.wall {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.wall-left {
+    width: 1000vw;
+    background: #f8f8f8;
+    /*Y축을 90도로 돌린다. 그 다음 Z축을 -500만큼해주었다.*/
+    transform: rotateY(90deg) translateZ(-500vw);
+}
+.wall-right {
+    width: 1000vw;
+    background: #f8f8f8;
+    /*Y축을 90도로 돌린다. 그 다음 Z축을 -400만큼해주었다.*/
+    transform: rotateY(90deg) translateZ(-400vw);
+}
+
+/*벽마다 레벨 적용시켜주기*/
+.wall-front-a {
+    transform: translateZ(300vw);
+}
+.wall-front-b {
+    transform: translateZ(50vw);
+}
+.wall-front-c {
+    transform: translateZ(-200vw);
+}
+.wall-front-d {
+    transform: translateZ(-500vw);
+}
+
+.wall-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.wall-title {
+    font-family: "Permanent Marker", cursive;
+    font-size: 5rem;
+}

@@ -1,0 +1,88 @@
+/* 상단 nav bar css */
+/* 모든 페이지 적용 */
+
+/* 상단 nav bar */
+.nav {
+    /* 상단에 항상 고정 */
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    /* 텍스트 가로 정렬 */
+    display: flex;
+    /* 각각의 텍스트들 한줄로 나란히 정렬 */
+    justify-content: center;
+    align-items: center;
+    /* nav bar 높이 */
+    height: 50px;
+    /* nar bar 텍스트간 padding */
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: var(--yellow);
+    font-family: "Baloo Paaji 2", cursive;
+    /* nav bar가 가장 윗 순서 */
+    z-index: 999;
+    /* box-shadow: 5px 2px 3px 5px #b3b3b3; */
+}
+/* 로고와 서비스명 가운데 정렬 */
+.nav__link:first-child {
+    display: flex;
+    align-items: center;
+}
+
+/* 로고 사이즈 */
+.nav__link img:first-child {
+    width: 30px;
+    height: 30px;
+}
+
+.nav__link:first-child span {
+    font-size: 30px;
+}
+
+/* 상단 nav bar 메뉴들 */
+.nav__menu {
+    display: flex;
+    margin-left: auto;
+}
+
+/* 상단 nave bar 각각 메뉴들 */
+.nav__item {
+    padding: 20px;
+}
+
+/* 마우스 올리면 글씨 진하게 */
+.nav__item :hover,
+.nav__item :active {
+    font-weight: bold;
+}
+
+/* 상단 nav bar 텍스트 */
+.nav__link {
+    color: black;
+    font-size: 20px;
+}
+
+/* gallery 포인트~ */
+.glow {
+    /* gallery 텍스트 둘러싼 컬러 */
+    --interval: 1s;
+    display: block;
+    text-shadow: 0 0 10px var(--color1), 0 0 20px var(--color2),
+        0 0 60px var(--color3), 0 0 80px var(--color4);
+    will-change: filter, color;
+    filter: saturate(80%);
+    animation: flicker steps(100) var(--interval) 1s infinite;
+    color: pink;
+    --color1: rgb(211, 104, 140);
+    --color2: var(--pink);
+    --color3: rgb(196, 86, 123);
+    --color4: red;
+}
+
+/* gallery 텍스트 컬러 */
+@keyframes flicker {
+    50% {
+        color: whitesmoke;
+        filter: saturate(200%) hue-rotate(20deg);
+    }
+}

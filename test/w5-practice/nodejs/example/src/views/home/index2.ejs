@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/DONATE.ico" />
+        <link rel="stylesheet" href="css/styles1.css" />
+        <title>Home</title>
+        <!-- <style>
+            body {
+                background-image: url("img/background.jpg");
+            }
+        </style> -->
+    </head>
+    <body class="home">
+        <!-- 메인페이지 상단 nav bar-->
+        <header class="nav">
+            <!-- 서비스명 및 로고  -->
+            <!-- 서비스명과 로고 클릭 시 메인 페이지로 이동 -->
+            <a class="nav__link" href="/">
+                <img src="../img/DONATE.ico" />
+                <span>AmaDo</span>
+            </a>
+            <!-- nav bar 메뉴들 -->
+            <ul class="nav__menu">
+                <!-- nav bar "HOME" 메뉴 버튼 -->
+                <!-- "Home" 클릭 시 메인 페이지로 이동 -->
+                <li class="nav__item">
+                    <a class="nav__link" href="/">Home</a>
+                </li>
+                <!-- 모든 NFT 리스트 -->
+                <li class="nav__item">
+                    <a class="nav__link" href="/donateNft">All NFTs</a>
+                </li>
+                <!-- nav bar "Gallery" 메뉴 버튼 -->
+                <li class="nav__item">
+                    <a class="nav__link glow" href="/gallery">Gallery</a>
+                </li>
+                <!-- nav bar "Create NFT" 메뉴 버튼 -->
+                <li class="nav__item">
+                    <a class="nav__link" href="/createNft">Create NFT</a>
+                </li>
+                <!-- nav bar "Log in" 메뉴 버튼 -->
+                <!-- Log in 클릭 시  메타마스크 연결-->
+                <div id="loginLink">
+                    <!-- 메타마스크 로그인 시 바뀌어야함 -->
+                    <li class="nav__item">
+                        <a class="nav__link" onclick="connectWallet();"
+                            >Log out</a
+                        >
+                    </li>
+                </div>
+            </ul>
+        </header>
+        <!-- 메인페이지 중간 부분 -->
+
+        <main class="main__main">
+            <!-- 메인화면 드롭  -->
+            <div id="drawingWrapper">
+                <div class="drawingStuff"><img src="img/drop1.png" /></div>
+                <div class="drawingStuff"><img src="img/drop2.png" /></div>
+                <div class="drawingStuff"><img src="img/drop3.png" /></div>
+                <div class="drawingStuff"><img src="img/drop1.png" /></div>
+                <div class="drawingStuff"><img src="img/drop2.png" /></div>
+                <div class="drawingStuff"><img src="img/drop3.png" /></div>
+                <div class="drawingStuff"><img src="img/drop1.png" /></div>
+                <div class="drawingStuff"><img src="img/drop2.png" /></div>
+                <div class="drawingStuff"><img src="img/drop3.png" /></div>
+            </div>
+            <!-- 서비스 대표 이미지, 서비스에 대한 간략한 텍스트, 서비스명, Donate 버튼 -->
+            <div class="main__row">
+                <div class="first__row">
+                    <div class="main__title">
+                        <h1>Welcome to AmaDo</h1>
+                        <h2>Donations for amateur artists</h2>
+                    </div>
+                    <!-- 메인 페이지 대표 이미지 및 Donate 버튼 -->
+                    <div class="main__title">
+                        <button class="main__donateBtn" onclick="donateBtn()">
+                            Donate
+                        </button>
+                        <h3>Support artists with your donation</h3>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 메인페이지 footer -->
+        <footer class="footer">
+            <div class="footer__div">
+                <div class="footer__menu">
+                    <!-- 플랫폼 로고 이미지 -->
+                    <ul class="footer__brandLogo">
+                        <li class="footer__li">
+                            <span>AmaDo</span>
+                        </li>
+                    </ul>
+                    <!-- 플랫폼 대표 전화, 주소, 이메일 입력 -->
+                    <ul class="footer__info">
+                        <li class="footer__li">
+                            상담센터 <span>070-123-4567</span>
+                        </li>
+                        <li class="footer__li">
+                            대표전화 <span>02-123-4567</span>
+                        </li>
+                        <li class="footer__li">
+                            주소
+                            <span
+                                >서울특별시 영등포구 양산로 53 월드메르디앙
+                                비즈센터</span
+                            >
+                        </li>
+                        <li class="footer__li">
+                            Email <span>ssjd6111@amado.com</span>
+                        </li>
+                    </ul>
+                    <!-- 플랫폼 스폰서 기업 로고 -->
+                    <ul class="footer__sns">
+                        <li class="footer__li">
+                            <span><i class="fab fa-twitter fa-2x"></i> </span
+                            ><span><i class="fab fa-instagram fa-2x"></i></span>
+                            <span
+                                ><i class="fab fa-facebook-square fa-2x"></i
+                            ></span>
+                            <span><i class="fab fa-youtube fa-2x"></i></span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 플랫폼 copyrights 텍스트 -->
+
+                <div class="footer__copy">
+                    <div class="footer__copyrights">
+                        @ AmaDo. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script type="text/javascript" src="lib/web3.min.js"></script>
+        <script
+            src="https://kit.fontawesome.com/6478f529f2.js"
+            crossorigin="anonymous"
+        ></script>
+        <script type="text/javascript" src="js/home/index.js"></script>
+    </body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="autoHeight" lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/DONATE.ico" />
+        <link rel="stylesheet" href="css/styles1.css" />
+        <style>
+            body {
+                background-image: url("img/background.jpg");
+                background-repeat: repeat-y;
+                background-repeat: repeat-x;
+            }
+        </style>
+        <title>Sign Up</title>
+    </head>
+
+    <body class="home">
+        <!-- 상단 nav bar -->
+        <header class="nav">
+            <!-- 서비스명 및 로고  -->
+            <!-- 서비스명과 로고 클릭 시 메인 페이지로 이동 -->
+            <a class="nav__link" href="/">
+                <img src="../img/DONATE.ico" />
+                <span>AmaDo</span>
+            </a>
+            <!-- nav bar 메뉴들 -->
+            <ul class="nav__menu">
+                <!-- nav bar "HOME" 메뉴 버튼 -->
+                <!-- "Home" 클릭 시 메인 페이지로 이동 -->
+                <li class="nav__item">
+                    <a class="nav__link" href="/">Home</a>
+                </li>
+                <!-- 모든 NFT 리스트 -->
+                <li class="nav__item">
+                    <a class="nav__link" href="/donateNft">All NFTs</a>
+                </li>
+                <!-- nav bar "Gallery" 메뉴 버튼 -->
+                <li class="nav__item">
+                    <a class="nav__link glow" href="/gallery">Gallery</a>
+                </li>
+                <!-- nav bar "Create NFT" 메뉴 버튼 -->
+                <li class="nav__item">
+                    <a class="nav__link" href="/createNft">Create NFT</a>
+                </li>
+                <!-- nav bar "Log in" 메뉴 버튼 -->
+                <!-- Log in 클릭 시  메타마스크 연결-->
+                <li class="nav__item">
+                    <a class="nav__link" href="/signUp">Log in</a>
+                </li>
+            </ul>
+        </header>
+        <main class="signUp__main">
+            <div class="container" id="container">
+                <!-- 가입하기 부분 -->
+                <div class="form__container signUp__container">
+                    <form class="form__sign">
+                        <h1 class="signUp__title">Create Account</h1>
+                        <!-- ID 입력 -->
+                        <input
+                            id="signUp-id"
+                            class="sign__input"
+                            type="text"
+                            placeholder="ID"
+                            autocomplete="on"
+                            required
+                        />
+                        <!-- NAME 입력 -->
+                        <input
+                            id="signUp-name"
+                            class="sign__input"
+                            type="text"
+                            placeholder="Name"
+                            autocomplete="on"
+                            required
+                        />
+                        <!-- wallet address 입력 -->
+                        <input
+                            id="signUp-address"
+                            class="sign__input"
+                            type="text"
+                            placeholder="Wallet Address"
+                            autocomplete="on"
+                            required
+                        />
+                        <!-- <input
+                  class="sign__input"
+                  type="email"
+                  placeholder="Email"
+                  autocomplete="on"
+                /> -->
+
+                        <!-- 패스워드 입력 -->
+                        <input
+                            id="signUp-ps"
+                            class="sign__input"
+                            type="password"
+                            placeholder="Password"
+                            required
+                        />
+                        <!-- 패스워드 확인 입력 -->
+                        <input
+                            id="signUp-confirmPs"
+                            class="sign__input"
+                            type="password"
+                            placeholder="Confirm Password"
+                            required
+                        />
+                        <!-- 체크박스 -->
+                        <div class="chk" id="signUp-chk">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="categorize"
+                                    value="artist"
+                                />아티스트</label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="categorize"
+                                    value="giver"
+                                />기부자</label
+                            >
+                        </div>
+                        <!-- 프로필 이미지 입력-->
+                        <div class="profile__preview" id="signUp-img">
+                            <div class="viewImg">
+                                <!-- main-content -->
+                                <img id="previewImg" src="" alt="Profile" />
+                            </div>
+                            <input
+                                type="file"
+                                id="profile_image"
+                                name="profile_image"
+                            />
+                        </div>
+
+                        <button id="registerBtn" class="signBtn">
+                            Sign Up
+                        </button>
+                    </form>
+                </div>
+                <!-- 로그인 부분 -->
+                <div class="form__container signIn__container">
+                    <div class="form__sign">
+                        <h1 class="signIn__title">Sign in</h1>
+                        <input
+                            id="signIn__id"
+                            class="sign__input"
+                            type="text"
+                            placeholder="ID"
+                            autocomplete="on"
+                        />
+                        <input
+                            id="signIn__ps"
+                            class="sign__input"
+                            type="password"
+                            placeholder="Password"
+                        />
+                        <!-- 비밀번호 찾을 수 있는 기능 넣을 수 있으면 추후에 넣기 -->
+                        <!-- <a class="forgotPs" href="#">Forgot your password?</a> -->
+                        <button id="loginBtn" class="signBtn">Sign In</button>
+                    </div>
+                </div>
+                <!-- overlay 부분 -->
+                <div class="overlay__container">
+                    <div class="overlay">
+                        <!-- 로그인 overlay -->
+                        <div class="overlay__panel overlay__left">
+                            <h1 class="greeting">Welcome Back!</h1>
+                            <p class="greeting__sentence">
+                                서비스 이용 전 로그인 해주세요.
+                            </p>
+                            <button class="signBtn" id="signIn">Sign In</button>
+                        </div>
+                        <!-- 회원가입 overlay -->
+                        <div class="overlay__panel overlay__right">
+                            <h1 class="greeting">Hello, Friend!</h1>
+                            <p class="greeting__sentence">
+                                서비스 이용을 위해 가입을 진행해주세요.
+                            </p>
+                            <button class="signBtn" id="signUp">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- footer -->
+        <footer class="footer">
+            <div class="footer__div">
+                <div class="footer__menu">
+                    <!-- 플랫폼 로고 이미지 -->
+                    <ul class="footer__brandLogo">
+                        <li class="footer__li">
+                            <span>AmaDo</span>
+                        </li>
+                    </ul>
+                    <!-- 플랫폼 대표 전화, 주소, 이메일 입력 -->
+                    <ul class="footer__info">
+                        <li class="footer__li">
+                            상담센터 <span>070-123-4567</span>
+                        </li>
+                        <li class="footer__li">
+                            대표전화 <span>02-123-4567</span>
+                        </li>
+                        <li class="footer__li">
+                            주소
+                            <span
+                                >서울특별시 영등포구 양산로 53 월드메르디앙
+                                비즈센터</span
+                            >
+                        </li>
+                        <li class="footer__li">
+                            Email <span>ssjd6111@amado.com</span>
+                        </li>
+                    </ul>
+                    <!-- sns 로고 -->
+                    <ul class="footer__sns">
+                        <li class="footer__li">
+                            <span><i class="fab fa-twitter fa-2x"></i> </span
+                            ><span><i class="fab fa-instagram fa-2x"></i></span>
+                            <span
+                                ><i class="fab fa-facebook-square fa-2x"></i
+                            ></span>
+                            <span><i class="fab fa-youtube fa-2x"></i></span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 플랫폼 copyrights 텍스트 -->
+
+                <div class="footer__copy">
+                    <div class="footer__copyrights">
+                        @ AmaDo. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script
+            src="https://kit.fontawesome.com/6478f529f2.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="js/home/signUp.js"></script>
+    </body>
+</html>

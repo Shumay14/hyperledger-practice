@@ -1,0 +1,15 @@
+/* 폰트 스타일 (구글 폰트) */
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+@import "reset.css";
+@import "variables.css";
+
+/* components - 희경 */
+@import "components/nav.css";
+
+/* screens - 은경*/
+@import "screens/profile.css";
+@import "components/modal.css";
+body {
+    font-family: "Noto Sans KR", sans-serif;
+}

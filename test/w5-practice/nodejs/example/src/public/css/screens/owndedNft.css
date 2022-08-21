@@ -1,0 +1,177 @@
+/* add by.eunkyung */
+
+.mynft-banner {
+    /* border: 0.5rem outset pink; */
+    background-color: rgb(255, 255, 255);
+}
+
+.container-owndNft {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+.mynft {
+    /* border: 2px solid red; */
+    background-color: rgb(255, 255, 255);
+    height: 280px;
+}
+.row-owndNft {
+    /* border: 0.5rem outset rgb(29, 243, 75); */
+    height: 100px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.row-owndNft1 {
+    font-size: 18px;
+    align-items: center;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+.row-owndNft2 {
+    font-size: 40px;
+    align-items: center;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+.container-owndNft2 {
+    padding: 60px;
+    border-top: 1px solid rgb(179, 179, 179);
+    height: 700px;
+    background-color: rgb(#969393);
+}
+
+.getNft {
+    color: rgb(63, 136, 85);
+    /* background-color: red; */
+    display: inline-block;
+}
+.getNft__text {
+    margin-left: 100px;
+    margin-bottom: 50px;
+    font-size: 25px;
+    color: grey;
+}
+.getNft__text:hover {
+    color: black;
+    cursor: pointer;
+    border-bottom: 1px solid rebeccapurple;
+}
+
+/* 이름 및 지갑 주소가 담긴 border */
+.accountNft {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+/* 이름 */
+.accountNft__name {
+    font-size: 35px;
+    margin-right: 20px;
+}
+
+/* 지갑 주소 */
+.accountNft__address {
+    font-size: 23px;
+}
+
+/* 소유한 또는 발행한 NFT 보여주는 title  */
+.account__nftList {
+    width: 90%;
+    margin: auto;
+    margin-top: 100px;
+    padding: 10px;
+}
+
+/* 소유한 또는 발행한 NFT title 텍스트 */
+.account__nftListTitle {
+    font-size: 27px;
+}
+
+/* 소유한 또는 발행한 NFT cards의 전체 border */
+.account__nftCardsList {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+/* NFT가 들어갈 4개의 틀 (세로줄) */
+.account__ownedNftList {
+    display: flex;
+    justify-content: space-around;
+    height: 380px;
+}
+
+/* NFT 이미지 각각의 틀 */
+.account__ownedNftRow {
+    width: 20%;
+    margin: 30px;
+    margin-bottom: 100px;
+}
+
+/* NFT 이미지 */
+.account__ownedNft {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/* NFT info */
+.account__top {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+/* NFT 이름, number*/
+.account__title {
+    width: 80%;
+    height: 80%;
+}
+
+/* NFT 이름 */
+.account__nftTitle {
+    font-size: 20px;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+/* NFT number */
+.account__number {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.7);
+    margin-top: 5px;
+}
+
+.account__artist {
+    font-size: 15px;
+    margin-top: 5px;
+    color: #a5a2a2;
+}
+
+/* NFT 가격 div */
+.account__price {
+    display: flex;
+    font-size: 25px;
+}
+
+/* 이더 아이콘 */
+.account__price i {
+    margin-right: 7px;
+    color: #fd6588;
+}
