@@ -205,26 +205,27 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+    <!-- <script src="js/scripts.js"></script> -->
 
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
   </body>
-  <script src="../public/wallet-admin.js">
+  <!-- <script src="../models/wallet-admin.js"> -->
+  <script>
     // // 버튼클릭시
     // // ID와 PASSWORD를 가져와서 /admin POST를 요청 -> Response를 화면에 출력
-    // $("#gen-btn").click(() => {
-    //   const id = $("#adminid").val();
-    //   const password = $("#adminpw").val();
+    $("#gen-btn").click(() => {
+      const id = $("#adminid").val();
+      const password = $("#adminpw").val();
 
-    //   console.log(id, password);
+      console.log(id, password);
 
-    //   $.post("/admin", { id, password }, (data, status) => {
-    //     console.log(status);
+      $.post("/admin", { id, password }, (data, status) => {
+        console.log(status);
 
-    //     $("#result").empty();
-    //     const res = JSON.stringify(data);
-    //     $("#result").append(res);
-    //   });
-    // });
+        $("#result").empty();
+        const res = JSON.stringify(data);
+        $("#result").append(res);
+      });
+    });
   </script>
 </html>
