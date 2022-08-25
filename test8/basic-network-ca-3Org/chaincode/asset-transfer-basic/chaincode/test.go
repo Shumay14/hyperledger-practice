@@ -1,4 +1,4 @@
-package bondsystem
+package esgbondsystem
 
 import (
 	"encoding/json"
@@ -45,13 +45,60 @@ type Investor struct {
 
 
 func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) error {
-	bond := 
+	esgbond := []ESGBond{
+		{Issuers: "", MaxIssuersNum: "", BondNum: "", MaxBondNum: "", FaceValue: "", PresentValue: "", DiscountRate: "", IssueDate: "", Maturity: "", Investor: ""},
+	}
+
+	for 
 	
 }
 
 
+// CC functions for corporates 
+func (s *SmartContract) JoinIssuer(ctx contractapi.TransactionContextInterface) {
+
+}
+
+
+func (s *SmartContract) IssueBond(ctx contractapi.TransactionContextInterface, Issuers string, MaxIssuersNum int, BondNum int, MaxBondNum int, 
+	FaceValue int, PresentValue int, DiscountRate int, IssueDate string, Maturity int, Investor string) error {
+		exists, err := s.AssetExists(ctx, id)
+		if err != nil {
+			return err
+		}
+		if exists {
+			return fmt.Errorf("the asset %s already exists", id)
+		}
+
+		
+	}
+
+
+func (s *SmartContract) RedeemBond(ctx contractapi, TransactionContextInterface, BondNum int, OwnedInvestor string) {
+	return 
+}
+
+func (s *SmartContract) ReceivableBondOffering(ctx contractapi.TransactionContextInterface, )
 
 
 
+
+// CC functions for investors
+func (s *SmartContract) DepositAsset(ctx contractapi.TransactionContextInterface) {}
+
+
+func (s *SmartContract) TransferAsset(ctx contractapi.TransactionContextInterface) {}
+
+
+func (s *SmartContract) WithdrawAsset(ctx contractapi.TransactionContextInterface) {}
+
+
+func (s *SmartContract) ReadAsset(ctx contractapi.TransactionContextInterface) {}
+
+
+
+func (s *SmartContract) ListBond(ctx contractapi.TransactionContextInterface, id string) {
+
+}
 
 
