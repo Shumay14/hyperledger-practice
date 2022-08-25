@@ -3,6 +3,8 @@ package esgbondsystem
 import (
 	"encoding/json"
 	"fmt"
+	"strconv"
+
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 )
 
@@ -11,37 +13,43 @@ type SmartContract struct {
 	contractapi.Contract
 }
 
+type QueryAllBonds struct {
+	BondNum
+}
+
 // Define Data Structure
 // describes ESGBond details
 type ESGBond struct {
 	Issuers       string `json:"issuers"`
+	Purpose       string `json:"purpose"`
 	MaxIssuersNum int    `json:"maxissuersnum"`
 	BondNum       int    `json:"bondnum"`
-	MaxBondNum    int    `json:maxbondnum`
-	FaceValue     int    `json:fv`
-	PresentValue  int    `json:pv`
-	DiscountRate  int    `json:discountrate`
-	IssueDate     string `json:issuedate`
-	Maturity      int    `json:maturity`
-	Investor      string `json:investor`
+	MaxBondNum    int    `json:"maxbondnum"`
+	FaceValue     int    `json:"fv"`
+	PresentValue  int    `json:"pv"`
+	DiscountRate  int    `json:"discountrate"`
+	IssueDate     string `json:"issuedate"`
+	Maturity      int    `json:"maturity"`
+	Investor      string `json:"investor"`
 }
 
 // describes Corporate details
 type Corporate struct {
-	Name      string `json:name`
-	ID        string `json:id`
-	BondIssue string `json:bondissue`
-	Balance   int    `json:balance`
+	Name      string `json:"name"`
+	ID        string `json:"id"`
+	BondIssue string `json:"bondissue"`
+	Balance   int    `json:"balance"`
 }
 
 // describe Investor details
 type Investor struct {
-	Name      string `json:name`
-	ID        string `json:id`
-	OwnedBond string `json:ownedbond`
-	Balance   int    `json:balance`
+	Name      string `json:"name"`
+	ID        string `json:"id"`
+	OwnedBond string `json:"ownedbond"`
+	Balance   int    `json:"balance"`
 }
 
+// why is it here? just for test? or check?
 func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) error {
 	esgbonds := []ESGBond{
 		{Issuers: "", MaxIssuersNum: "", BondNum: "", MaxBondNum: "", FaceValue: "", PresentValue: "", DiscountRate: "", IssueDate: "", Maturity: "", Investor: ""},
@@ -114,6 +122,41 @@ func (s *SmartContract) WithdrawAsset(ctx contractapi.TransactionContextInterfac
 
 func (s *SmartContract) ReadAsset(ctx contractapi.TransactionContextInterface) {}
 
-func (s *SmartContract) ListBond(ctx contractapi.TransactionContextInterface, id string) {
+// QueryAllBonds returns all esg bonds found in worldstate
+func (s *SmartContract) ListAllBonds(ctx contractapi.TransactionContextInterface) ([]*ESGBond, error) {
 
+	// range query with empty string for startKey and endKey does an
+	// open-ended query of all assets in the chaincode namespace.
+	resultsIterator, err := ctx.GetStub().GetStateByRange("", "")
+	if err != nil {
+		return nil, err
+	}
+	defer resultsIterator.Close()
+
+	//
+	var esgbonds []*ESGBond
+	for resulteIterator.HasNext() {
+		queryResponse, err := resultIterator.Next()
+		if err != nil {
+			return nil, err
+		}
+
+		var esgbond ESGBond
+		err = json.Unmarshal(queryResponse.Value, &esgbond)
+	}
+	return esgbonds, nil
+}
+
+func esgbondsystem() {
+
+	chaincode, err := contractapi.NewChaincode(new(SmartContract))
+
+	if err != nil {
+		fmt.Printf("Error create fabcar chaincode: %s", err.Error())
+		return
+	}
+
+	if err := chaincode.Start(); err != nil {
+		fmt.Printf("Error starting fabcar chaincode: %s", err.Error())
+	}
 }
