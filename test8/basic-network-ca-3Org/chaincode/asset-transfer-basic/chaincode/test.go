@@ -47,7 +47,7 @@ func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) 
 		{Issuers: "", MaxIssuersNum: "", BondNum: "", MaxBondNum: "", FaceValue: "", PresentValue: "", DiscountRate: "", IssueDate: "", Maturity: "", Investor: ""},
 	}
 
-	// _ 무엇이 들어가야 하나요?
+	// _ index 안받음
 	for _, esgbond := range esgbonds {
 		esgbondJSON, err := json.Marshal(esgbond)
 		if err != nil {
@@ -56,7 +56,6 @@ func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) 
 
 		err = ctx.GetStub().PutState(esgbond.Issuers, esgbondJSON)
 		if err != nil {
-			// %v 에는 esgbondJSON 이 들어가나요?
 			// Errorf 에러 스트링 객체로 만들어줌
 			return fmt.Errorf("failed to put to world state. %v", err)
 		}
@@ -68,8 +67,8 @@ func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) 
 
 // CC functions for corporates
 // Issue new Bond
-func (s *SmartContract) IssueBond(ctx contractapi.TransactionContextInterface, Issuers string, MaxIssuersNum int, BondNum int, MaxBondNum int,
-	FaceValue int, PresentValue int, DiscountRate int, IssueDate string, Maturity int, Investor string) error {
+func (s *SmartContract) IssueBond(ctx contractapi.TransactionContextInterface, issuers string, maxissuersnum int, bondnum int, maxbondnum int,
+	facevalue int, presentvalue int, discountrate int, issuedate string, maturity int, investor string) error {
 	exists, err := s.AssetExists(ctx, id)
 	if err != nil {
 		return err
@@ -83,15 +82,15 @@ func (s *SmartContract) IssueBond(ctx contractapi.TransactionContextInterface, I
 		MaxIssuersNum: maxissuersnum,
 		BondNum:       bondnum,
 		MaxBondNum:    maxbondnum,
-		FaceValue:     fv,
-		PresentValue:  pv,
+		FaceValue:     facevalue,
+		PresentValue:  presentvalue,
 		DiscountRate:  discountrate,
 		IssueDate:     issuedate,
 		Maturity:      maturity,
 		Investor:      investor,
 	}
 
-	esgbondJSON, err := json.Marshal(asset)
+	esgbondJSON, err := json.Marshal(esgbond)
 	if err != nil {
 		return err
 	}
