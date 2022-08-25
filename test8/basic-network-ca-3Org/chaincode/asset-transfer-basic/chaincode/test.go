@@ -1,8 +1,9 @@
 package bondsystem
 
 import (
-	"encoding/json",
-	"fmt",
+	"encoding/json"
+	"fmt"
+	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 
 )
 
@@ -28,19 +29,24 @@ type ESGBond struct {
 
 // describes Corporate details
 type Corporate struct {
-	Name		  string
-	ID			  string	
-	BondIssue 	  string
-	Balance		  int
+	Name		  string	`json:name`
+	ID			  string	`json:id`
+	BondIssue 	  string	`json:bondissue`
+	Balance		  int		`json:balance`
 }
 
 // describe Investor details
 type Investor struct {
-	Name		  string
-	ID			  string
-	OwnedBond	  string
-	Balance		  int
+	Name		  string 	`json:name`
+	ID			  string	`json:id`
+	OwnedBond	  string	`json:ownedbond`
+	Balance		  int		`json:balance`
+}
 
+
+func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) error {
+	bond := 
+	
 }
 
 
