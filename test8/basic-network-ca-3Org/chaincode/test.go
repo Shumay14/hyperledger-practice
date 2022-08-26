@@ -27,8 +27,8 @@ type ESGBond struct {
 	MaxIssuersNum int    `json:"maxissuersnum"`
 	BondNum       int    `json:"bondnum"`
 	MaxBondNum    int    `json:"maxbondnum"`
-	FaceValue     int    `json:"fv"`
-	PresentValue  int    `json:"pv"`
+	FaceValue     int    `json:"facevalue"`
+	PresentValue  int    `json:"presentvalue"`
 	DiscountRate  int    `json:"discountrate"`
 	IssueDate     string `json:"issuedate"`
 	Maturity      int    `json:"maturity"`

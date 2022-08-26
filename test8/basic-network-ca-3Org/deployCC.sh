@@ -21,7 +21,7 @@ export FABRIC_CFG_PATH=${PWD}/config
 
 # CHANNEL_NAME="mychannel"
 CC_NAME="basic"
-CC_SRC_PATH="./chaincode/asset-transfer-basic"
+CC_SRC_PATH="./chaincode"
 CC_RUNTIME_LANGUAGE="golang"
 CC_VERSION="1"
 CHANNEL_NAME="mychannel"
@@ -163,9 +163,18 @@ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.exa
 cat log.txt
 sleep 3
 
-## TEST2 : Query the chaincode
-infoln "TEST2 : Query the chaincode"
+## TEST2 : Invoking the chaincode
+infoln "TEST2 : Invoking the chaincode"
 set -x
-peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"Args":["GetAllAssets"]}' >&log.txt
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CC_NAME} $PEER_CONN_PARMS -c '{"function":"IssueBond","Args":["Samsung", 5, 1, 100,
+	10000, 9000, 10, "2022-01-01", 1, "sjy"]}' >&log.txt
+{ set +x; } 2>/dev/null
+cat log.txt
+sleep 3
+
+## TEST3 : Query the chaincode
+infoln "TEST3 : Query the chaincode"
+set -x
+peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"Args":["ListAllBonds"]}' >&log.txt
 { set +x; } 2>/dev/null
 cat log.txt

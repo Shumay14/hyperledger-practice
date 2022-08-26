@@ -13,7 +13,7 @@ const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf8"));
 
 // 3. 서버설정
 const app = express();
-const PORT = 3000;
+const PORT = 8000;
 const HOST = "0.0.0.0";
 
 app.use(express.static(path.join(__dirname, "views")));
