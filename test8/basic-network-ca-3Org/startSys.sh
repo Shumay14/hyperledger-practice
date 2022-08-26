@@ -14,13 +14,15 @@ pushd ../network
 
 ./startnetwork.sh
 
-# sleep 5
+sleep 5
 
-# cd application/ccp/
+pushd application/ccp/
 
-# sleep 5
+sleep 5
 
-# ./ccp-generate.sh
+./ccp-generate.sh
+
+popd
 
 sleep 5
 

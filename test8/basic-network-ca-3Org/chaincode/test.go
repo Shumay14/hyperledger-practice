@@ -4,6 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 
+	// "github.com/hyperledger/fabric/core/chaincode/shim"
+	// "github.com/hyperledger/fabric/protos/peer"
+
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 )
 
@@ -158,4 +161,5 @@ func main() {
 	if err := chaincode.Start(); err != nil {
 		fmt.Printf("Error starting fabcar chaincode: %s", err.Error())
 	}
+
 }
