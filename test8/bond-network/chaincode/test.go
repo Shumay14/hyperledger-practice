@@ -55,6 +55,8 @@ type Investor struct {
 func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) error {
 	esgbonds := []ESGBond{
 		{Issuers: "Samsung", MaxIssuersNum: 5, BondNum: 1, MaxBondNum: 100, FaceValue: 10000, PresentValue: 9000, DiscountRate: 10, IssueDate: "2022-01-01", Maturity: 1, Investor: "sjy"},
+		{Issuers: "SK", MaxIssuersNum: 5, BondNum: 2, MaxBondNum: 100, FaceValue: 10000, PresentValue: 9000, DiscountRate: 10, IssueDate: "2022-01-01", Maturity: 1, Investor: "sjy"},
+		{Issuers: "Hyundai", MaxIssuersNum: 5, BondNum: 3, MaxBondNum: 100, FaceValue: 10000, PresentValue: 9000, DiscountRate: 10, IssueDate: "2022-01-01", Maturity: 1, Investor: "sjy"},
 	}
 
 	// _ index 안받음

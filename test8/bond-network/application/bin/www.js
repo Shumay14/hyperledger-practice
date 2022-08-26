@@ -1,5 +1,5 @@
 "use strict";
-const app = require("../app");
+const app = require("../test/app");
 
 const PORT = process.env.PORT || 8000;
 const HOST = "0.0.0.0";
