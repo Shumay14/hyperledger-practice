@@ -20,11 +20,11 @@ export FABRIC_CFG_PATH=${PWD}/config
 # Chaincode config variable
 
 # CHANNEL_NAME="mychannel"
-CC_NAME="basic"
+CC_NAME="bondsys"
 CC_SRC_PATH="./chaincode"
 CC_RUNTIME_LANGUAGE="golang"
 CC_VERSION="1"
-CHANNEL_NAME="mychannel"
+CHANNEL_NAME="bondsystem"
 
 
 ## package the chaincode
