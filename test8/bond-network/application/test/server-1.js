@@ -32,7 +32,11 @@ app.post("/admin", async (req, res) => {
     // Create a new CA client for interacting with the CA.
     const caInfo = ccp.certificateAuthorities["ca.org1.example.com"];
     const caTLSCACerts = caInfo.tlsCACerts.pem;
-    const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
+    const ca = new FabricCAServices(
+      caInfo.url,
+      { trustedRoots: caTLSCACerts, verify: false },
+      caInfo.caName
+    );
 
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), "wallet");
@@ -42,14 +46,19 @@ app.post("/admin", async (req, res) => {
     // Check to see if we've already enrolled the admin user.
     const identity = await wallet.get(id);
     if (identity) {
-      console.log(`An identity for the admin user ${id} already exists in the wallet`);
+      console.log(
+        `An identity for the admin user ${id} already exists in the wallet`
+      );
       const res_str = `{"result":"failed","msg":"An identity for the admin user ${id} already exists in the wallet"}`;
       res.json(JSON.parse(res_str));
       return;
     }
 
     // Enroll the admin user, and import the new identity into the wallet.
-    const enrollment = await ca.enroll({ enrollmentID: id, enrollmentSecret: pw });
+    const enrollment = await ca.enroll({
+      enrollmentID: id,
+      enrollmentSecret: pw,
+    });
     const x509Identity = {
       credentials: {
         certificate: enrollment.certificate,
@@ -61,7 +70,9 @@ app.post("/admin", async (req, res) => {
     await wallet.put(id, x509Identity);
 
     // response to client
-    console.log('Successfully enrolled admin user "admin" and imported it into the wallet');
+    console.log(
+      'Successfully enrolled admin user "admin" and imported it into the wallet'
+    );
     const res_str = `{"result":"success","msg":"Successfully enrolled admin user ${id} in the wallet"}`;
     res.status(200).json(JSON.parse(res_str));
   } catch (error) {
@@ -82,7 +93,11 @@ app.post("/user", async (req, res) => {
     // Create a new CA client for interacting with the CA.
     const caInfo = ccp.certificateAuthorities["ca.org1.example.com"];
     const caTLSCACerts = caInfo.tlsCACerts.pem;
-    const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
+    const ca = new FabricCAServices(
+      caInfo.url,
+      { trustedRoots: caTLSCACerts, verify: false },
+      caInfo.caName
+    );
 
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), "wallet");
@@ -92,7 +107,9 @@ app.post("/user", async (req, res) => {
     // Check to see if we've already enrolled the user.
     const userIdentity = await wallet.get(id);
     if (userIdentity) {
-      console.log('An identity for the user "appUser" already exists in the wallet');
+      console.log(
+        'An identity for the user "appUser" already exists in the wallet'
+      );
       const res_str = `{"result":"failed","msg":"An identity for the user ${id} already exists in the wallet"}`;
       res.json(JSON.parse(res_str));
       return;
@@ -101,20 +118,24 @@ app.post("/user", async (req, res) => {
     // Check to see if we've already enrolled the admin user.
     const adminIdentity = await wallet.get("admin");
     if (!adminIdentity) {
-      console.log('An identity for the admin user "admin" does not exist in the wallet');
+      console.log(
+        'An identity for the admin user "admin" does not exist in the wallet'
+      );
       const res_str = `{"result":"failed","msg":"An identity for the admin user ${id} does not exists in the wallet"}`;
       res.json(JSON.parse(res_str));
       return;
     }
 
     // build a user object for authenticating with the CA
-    const provider = wallet.getProviderRegistry().getProvider(adminIdentity.type);
+    const provider = wallet
+      .getProviderRegistry()
+      .getProvider(adminIdentity.type);
     const adminUser = await provider.getUserContext(adminIdentity, "admin");
 
     // Register the user, enroll the user, and import the new identity into the wallet.
     const secret = await ca.register(
       {
-        affiliation: "org1.department1",
+        // affiliation: "org1.department1",
         enrollmentID: id,
         role: userrole,
       },
@@ -135,7 +156,9 @@ app.post("/user", async (req, res) => {
     await wallet.put(id, x509Identity);
 
     // response to client
-    console.log('Successfully registered and enrolled admin user "appUser" and imported it into the wallet');
+    console.log(
+      'Successfully registered and enrolled admin user "appUser" and imported it into the wallet'
+    );
     const res_str = `{"result":"success","msg":"Successfully enrolled user ${id} in the wallet"}`;
     res.status(200).json(JSON.parse(res_str));
   } catch (error) {
@@ -153,7 +176,9 @@ app.post("/asset", async (req, res) => {
   const size = req.body.size;
   const owner = req.body.owner;
   const value = req.body.value;
-  console.log("/asset-post-" + id + ":" + color + ":" + size + ":" + owner + ":" + value);
+  console.log(
+    "/asset-post-" + id + ":" + color + ":" + size + ":" + owner + ":" + value
+  );
 
   // Create a new file system based wallet for managing identities.
   const walletPath = path.join(process.cwd(), "wallet");
@@ -171,7 +196,11 @@ app.post("/asset", async (req, res) => {
 
   // Create a new gateway for connecting to our peer node.
   const gateway = new Gateway();
-  await gateway.connect(ccp, { wallet, identity: cert, discovery: { enabled: true, asLocalhost: true } });
+  await gateway.connect(ccp, {
+    wallet,
+    identity: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
 
   // Get the network (channel) our contract is deployed to.
   const network = await gateway.getNetwork("mychannel");
@@ -180,15 +209,27 @@ app.post("/asset", async (req, res) => {
   const contract = network.getContract("basic");
 
   // Submit the specified transaction.
-  console.log("\n--> Submit Transaction: CreateAsset, creates new asset with ID, color, owner, size, and appraisedValue arguments");
-  await contract.submitTransaction("CreateAsset", id, color, size, owner, value);
+  console.log(
+    "\n--> Submit Transaction: CreateAsset, creates new asset with ID, color, owner, size, and appraisedValue arguments"
+  );
+  await contract.submitTransaction(
+    "CreateAsset",
+    id,
+    color,
+    size,
+    owner,
+    value
+  );
   console.log("Transaction(CreateAsset) has been submitted");
 
   // response -> client
   await gateway.disconnect();
   const resultPath = path.join(process.cwd(), "/views/result.html");
   var resultHTML = fs.readFileSync(resultPath, "utf-8");
-  resultHTML = resultHTML.replace("<dir></dir>", "<div><p>Transaction(CreateAsset) has been submitted</p></div>");
+  resultHTML = resultHTML.replace(
+    "<dir></dir>",
+    "<div><p>Transaction(CreateAsset) has been submitted</p></div>"
+  );
   res.status(200).send(resultHTML);
 });
 
@@ -214,7 +255,11 @@ app.get("/asset", async (req, res) => {
 
   // Create a new gateway for connecting to our peer node.
   const gateway = new Gateway();
-  await gateway.connect(ccp, { wallet, identity: cert, discovery: { enabled: true, asLocalhost: true } });
+  await gateway.connect(ccp, {
+    wallet,
+    identity: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
 
   // Get the network (channel) our contract is deployed to.
   const network = await gateway.getNetwork("mychannel");
@@ -223,7 +268,9 @@ app.get("/asset", async (req, res) => {
   const contract = network.getContract("basic");
 
   // Submit the specified transaction.
-  console.log(`\n--> Evaluate Transaction: ReadAsset, function returns "${id}" attributes`);
+  console.log(
+    `\n--> Evaluate Transaction: ReadAsset, function returns "${id}" attributes`
+  );
   result = await contract.evaluateTransaction("ReadAsset", id);
 
   // response -> client
@@ -240,7 +287,9 @@ app.post("/update", async (req, res) => {
   const size = req.body.size;
   const owner = req.body.owner;
   const value = req.body.value;
-  console.log("/update-post-" + id + ":" + color + ":" + size + ":" + owner + ":" + value);
+  console.log(
+    "/update-post-" + id + ":" + color + ":" + size + ":" + owner + ":" + value
+  );
 
   // Create a new file system based wallet for managing identities.
   const walletPath = path.join(process.cwd(), "wallet");
@@ -258,7 +307,11 @@ app.post("/update", async (req, res) => {
 
   // Create a new gateway for connecting to our peer node.
   const gateway = new Gateway();
-  await gateway.connect(ccp, { wallet, identity: cert, discovery: { enabled: true, asLocalhost: true } });
+  await gateway.connect(ccp, {
+    wallet,
+    identity: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
 
   // Get the network (channel) our contract is deployed to.
   const network = await gateway.getNetwork("mychannel");
@@ -268,17 +321,26 @@ app.post("/update", async (req, res) => {
 
   // Submit the specified transaction.
   console.log("\n--> Submit Transaction: UpdateAsset asset");
-  await contract.submitTransaction("UpdateAsset", id, color, size, owner, value);
+  await contract.submitTransaction(
+    "UpdateAsset",
+    id,
+    color,
+    size,
+    owner,
+    value
+  );
   console.log("Transaction(UpdateAsset) has been submitted");
 
   // response -> client
   await gateway.disconnect();
   const resultPath = path.join(process.cwd(), "/views/result.html");
   var resultHTML = fs.readFileSync(resultPath, "utf-8");
-  resultHTML = resultHTML.replace("<dir></dir>", "<div><p>Transaction(UpdateAsset) has been submitted</p></div>");
+  resultHTML = resultHTML.replace(
+    "<dir></dir>",
+    "<div><p>Transaction(UpdateAsset) has been submitted</p></div>"
+  );
   res.status(200).send(resultHTML);
 });
-
 
 // homework
 // 4.4 /delete POST (자산삭제)
@@ -303,7 +365,11 @@ app.post("/delete", async (req, res) => {
 
   // Create a new gateway for connecting to our peer node.
   const gateway = new Gateway();
-  await gateway.connect(ccp, { wallet, identity: cert, discovery: { enabled: true, asLocalhost: true } });
+  await gateway.connect(ccp, {
+    wallet,
+    identity: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
 
   // Get the network (channel) our contract is deployed to.
   const network = await gateway.getNetwork("mychannel");
@@ -320,7 +386,10 @@ app.post("/delete", async (req, res) => {
   await gateway.disconnect();
   const resultPath = path.join(process.cwd(), "/views/result.html");
   var resultHTML = fs.readFileSync(resultPath, "utf-8");
-  resultHTML = resultHTML.replace("<dir></dir>", "<div><p>Transaction(DeleteAsset) has been submitted</p></div>");
+  resultHTML = resultHTML.replace(
+    "<dir></dir>",
+    "<div><p>Transaction(DeleteAsset) has been submitted</p></div>"
+  );
   res.status(200).send(resultHTML);
 });
 
@@ -345,7 +414,11 @@ app.get("/assets", async (req, res) => {
 
   // Create a new gateway for connecting to our peer node.
   const gateway = new Gateway();
-  await gateway.connect(ccp, { wallet, identity: cert, discovery: { enabled: true, asLocalhost: true } });
+  await gateway.connect(ccp, {
+    wallet,
+    identity: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
 
   // Get the network (channel) our contract is deployed to.
   const network = await gateway.getNetwork("mychannel");
@@ -354,7 +427,9 @@ app.get("/assets", async (req, res) => {
   const contract = network.getContract("basic");
 
   // Submit the specified transaction.
-  console.log(`\n--> Evaluate Transaction: GetAllAssets, function returns attributes`);
+  console.log(
+    `\n--> Evaluate Transaction: GetAllAssets, function returns attributes`
+  );
   result = await contract.evaluateTransaction("GetAllAssets");
 
   // response -> client
@@ -370,7 +445,7 @@ app.post("/transfer", async (req, res) => {
   const id = req.body.id;
   const owner = req.body.owner;
   console.log("/transfer-post-" + owner);
-  console.log(cert, id , owner);
+  console.log(cert, id, owner);
 
   // Create a new file system based wallet for managing identities.
   const walletPath = path.join(process.cwd(), "wallet");
@@ -388,11 +463,13 @@ app.post("/transfer", async (req, res) => {
 
   // Create a new gateway for connecting to our peer node.
   const gateway = new Gateway();
-  await gateway.connect(ccp, { wallet, identity: cert, discovery: { enabled: true, asLocalhost: true } });
+  await gateway.connect(ccp, {
+    wallet,
+    identity: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
 
   // Get the network (channel) our contract is deployed to.
-
-
 
   const network = await gateway.getNetwork("mychannel");
 

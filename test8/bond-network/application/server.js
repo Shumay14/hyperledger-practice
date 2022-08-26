@@ -25,7 +25,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // 4. REST api Routing
-//// 4.1. /admin POST 라우팅 (id, password)
+//// POST 라우팅
+//// 4.0.1 /admin POST 라우팅 (id, password)
 app.post("/admin", async (req, res) => {
   const id = req.body.id;
   const pw = req.body.password;
@@ -86,5 +87,152 @@ app.post("/admin", async (req, res) => {
   }
 });
 
-//// 4.2. /user POST ROUTING (id , userrole)
+//// 4.0.2 /user POST ROUTING (id , userrole)
 //// 기업이나 투자자로 바꿔야함
+app.post("/user", async (req, res) => {
+  const id = req.body.id;
+  const userrole = req.body.userrole;
+
+  console.log(id, userrole);
+
+  try {
+    // Create a new CA client for interacting with the CA.
+    const caInfo = ccp.certificateAuthorities["ca.orderer.example.com"];
+    const caTLSCACerts = caInfo.caTLSCACerts.pem;
+    const ca = new FabricCAServices(
+      caInfo.url,
+      { trustedRoots: caTLSCACerts, verify: false },
+      caInfo.caName
+    );
+
+    // Create a new file system based wallet for managing identities.
+    const walletPath = path.join(process.cwd(), "wallet");
+    const wallet = await Wallets.newFileSystemWallet(walletPath);
+    console.log(`Wallet path: ${walletPath}`);
+
+    // Check to see if we've already enrolled the admin user.
+    const adminIdentity = await wallet.get("admin");
+    if (!adminIdentity) {
+      console.log(
+        'An identity for the admin user "admin" does not exist in the wallet'
+      );
+      const res_str = `{"result":"failed","msg":"An identity for the admin user ${id} does not exists in the wallet"}`;
+      res.json(JSON.parse(res_str));
+      return;
+    }
+
+    // Check to see if we've already enrolled the user.
+    const userIdentity = await wallet.get(id);
+    if (userIdentity) {
+      console.log(
+        `An identitiy for the user "appUser" already exists in the wallet`
+      );
+      const res_str = `{"result":"failed","msg":"An identity for the user ${id} already exists in the wallet"}`;
+      res.json(JSON.parse(res_str));
+      return;
+    }
+
+    // build a user object for authenticating with the CA
+    const provider = wallet
+      .getProviderRegistry()
+      .getProvider(adminIdentity.type);
+    const adminUser = await provider.getUserContext(adminIdentity, "admin");
+
+    // Register the user, enroll the user, and import the new identity into the wallet.
+    const secret = await ca.register(
+      {
+        enrollmentID: id,
+        role: userrole,
+      },
+      adminUser
+    );
+    const enrollment = await ca.enroll({
+      enrollmentID: id,
+      enrollmentSecret: secret,
+    });
+    const x509Identity = {
+      credentials: {
+        certificate: enrollment.certificate,
+        privateKey: enrollment.key.toBytes(),
+      },
+      mspId: "Org1MSP",
+      type: "X.509",
+    };
+    await wallet.put(id, x509Identity);
+
+    // response to client
+    console.log(
+      'Successfully registered and enrolled admin user "appUser" and imported it into the wallet'
+    );
+
+    const res_str = `{"result":"success","msg":"Successfully enrolled user ${id} in the wallet"}`;
+    res.json(JSON.parse(res_str));
+  } catch (error) {
+    console.error(`Failed to enroll admin user ${id}`);
+    const res_str = `{"result": "failed", "msg": "failed to register user - ${id} : ${error}"}`;
+    res.json(JSON.parse(res_str));
+  }
+});
+
+//// 4.1.0 /bond POST (채권 생성)
+app.post("/bond", async (req, res) => {
+  const cert = req.body.cert;
+  const issuers = req.body.issuers;
+  const maxissuersnum = req.body.maxissuersnum;
+  const bondnum = req.body.bondnum;
+  const maxbondnum = req.body.maxbondnum;
+  const facevalue = req.body.facevalue;
+  const presentvalue = req.body.presentvalue;
+  const issuedate = req.body.issuedate;
+  const maturity = req.body.maturity;
+  const investor = req.body.investor;
+  console.log(
+    "/bond-post-" +
+      issuers +
+      ":" +
+      maxissuersnum +
+      ":" +
+      bondnum +
+      ":" +
+      maxbondnum +
+      ":" +
+      facevalue +
+      ":" +
+      presentvalue +
+      ":" +
+      issuedate +
+      ":" +
+      maturity +
+      ":" +
+      investor +
+      ":"
+  );
+
+  // Create a new file system based wallet for managing identities.
+  const walletPath = path.join(process.cwd(), "wallet");
+  const wallet = await Wallets.newFileSystemWallet(walletPath);
+  console.log(`Wallet path: ${walletPath}`);
+
+  // Check to see if we've already enrolled the admin user.
+  const identity = await wallet.get(cert);
+  if (!identity) {
+    console.log(`An identity for the user does not exists in the wallet`);
+    const res_str = `{"result":"failed","msg":"An identity for the user does not exists in the wallet"}`;
+    res.json(JSON.parse(res_str));
+    return;
+  }
+
+  // Create a new gateway for connecting to our peer node.
+  const gateway = new Gateway();
+  await gateway.connect(ccp, {
+    wallet,
+    identitiy: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
+
+  // Get the network (channel) our contract is deployed to.
+  const network = await gateway.getNetwork("bondsystem");
+
+  // Get the contract from the network.
+  const contract = network.getContract("bondsys");
+});
