@@ -10,7 +10,7 @@ const { Gateway, Wallets } = require("fabric-network");
 
 // 2. connection.json 객체화
 const ccpPath = path.resolve(__dirname, "ccp", "connection-orderer.json");
-const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf8"));
+const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf-8"));
 
 // 3. 서버 설정
 const app = express();
@@ -86,6 +86,9 @@ app.post("/admin", async (req, res) => {
     res.json(JSON.parse(res_str));
   }
 });
+
+// CODING TABLE
+// POST ROUTING
 
 //// 4.0.2 /user POST ROUTING (id , userrole)
 //// 기업이나 투자자로 바꿔야함
@@ -235,4 +238,60 @@ app.post("/bond", async (req, res) => {
 
   // Get the contract from the network.
   const contract = network.getContract("bondsys");
+
+  // Submit the specified transaction.
+  console.log(
+    "\n--> Submit Transaction: IssueBond, issue new bond with issuers, maxissuersnum, bondnum, maxbondnum, and etc. arguments"
+  );
+  await contract.submitTransaction();
+  console.log("Transaction(IssueBond) has been submitted");
+
+  // response - client
+  await gateway.disconnect();
+  const resultPath = path.join(process.cwd(), "/views/result.html");
+  var resultHTML = fs.readFileSync(resultPaht, "utf-8");
+  resultHTML = resultHTML.replace(
+    "<dir></dir>",
+    "<dir><p>Transaction(IssueBond) has been submitted</p></div>"
+  );
+  res.status(200).send(resultHTML);
+});
+
+// GET ROUTING
+// 4.2. /asset GET (자산조회)
+app.get("/asset", async (req, res) => {
+  const cert = req.query.cert;
+  const id = req.query.id;
+  console.log("/asset-get-", +id);
+
+  // Create a new file systme based wallet for managing identitiies.
+  const walletPath = path.join(process.cwd(), "wallet");
+  const wallet = await Wallets.newFileSystemWallet(walletPath);
+  console.log(`Waleet path: ${walletPath}`);
+
+  // Check to see if we've already enrolled the admin user.
+  const identity = await wallet.get(cert);
+  if (!identity) {
+    console.log(`An identitiy for the user does not exists in the wallet`);
+    const res_str = `{"result": "failed", "msg": "An identity for the user does not exists in the wallet"}`;
+    res.json(JSON.parse(res_str));
+    return;
+  }
+
+  // Create a new gateway for connecting to our peer node.
+  const gateway = new Gateway();
+  await gateway.connect(ccp, {
+    wallet,
+    identity: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
+
+  // Get the network (channel) our contract is deployed to.
+  const nework = await gateway.getNetwork("bondsystem");
+
+  // Get the contract from the network.
+  const contract = network.getContract("bondsys");
+
+  // Submit the specified transaction.
+  console.log(`\n--> Evaluate Transaction: Bond`);
 });
