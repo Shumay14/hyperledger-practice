@@ -328,3 +328,21 @@ app.get("/asset", async (req, res) => {
   const res_str = `{"result": "success", "msg": ${result}}`;
   res.status(200).json(JSON.parse(res_str));
 });
+
+// 4.6. /transferasset POST
+app.post("/transferasset", async (req, res) => {
+  const cert = req.body.cert;
+  const bondnum = req.body.id;
+  const investor = req.body.owner;
+  console.log("/transfer-post-" + investor);
+  console.log(cert, bondnum, investor);
+
+  // Create a new file system based wallet for managing identities.
+  const walletPath = path.join(process.cwd(), "wallet");
+  const wallet = await Wallets.newFileSystemWallet(walletPath);
+  console.log(`Wallet path: ${walletPath}`);
+});
+
+// 5. Server Start
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
