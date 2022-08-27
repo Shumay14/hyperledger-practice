@@ -279,7 +279,7 @@ app.get("/asset", async (req, res) => {
   }
 
   // Create a new gateway for connecting to our peer node.
-  const gateway = new Gateway();
+  gateway = new Gateway();
   await gateway.connect(ccp, {
     wallet,
     identity: cert,
@@ -287,11 +287,44 @@ app.get("/asset", async (req, res) => {
   });
 
   // Get the network (channel) our contract is deployed to.
-  const nework = await gateway.getNetwork("bondsystem");
+  network = await gateway.getNetwork("bondsystem");
+
+  // Get the contract from the network.
+  contract = network.getContract("bondsys");
+
+  // Submit the specified transaction.
+  console.log(
+    `\n--> Evaluate Transaction: BondList, function returns "${bondnum} attributes`
+  );
+  result = await contract.evaluateTransaction("BondList", bondnum);
+
+  // response -> client
+  await gateway.disconnect();
+  res_str = `{"result": "success", "msg": ${result}}`;
+  res.status(200).json(JSON.parse(res_str));
+
+  // Create a new gateway for connecting to our peer node.
+  const gateway = new Gateway();
+  await gateway.connect(ccp, {
+    wallet,
+    identitiy: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
+
+  // Get the network (channel) our contract is deployed to.
+  const network = await gateway.getNetwork("bondsystem");
 
   // Get the contract from the network.
   const contract = network.getContract("bondsys");
 
   // Submit the specified transaction.
-  console.log(`\n--> Evaluate Transaction: Bond`);
+  console.log(
+    `\n--> Evaluate Transaction: BondList, function returns "${bondnum}" attributes`
+  );
+  result = await contract.evaluateTransaction("BondList", id);
+
+  // response -> client
+  await gateway.disconnect();
+  const res_str = `{"result": "success", "msg": ${result}}`;
+  res.status(200).json(JSON.parse(res_str));
 });
