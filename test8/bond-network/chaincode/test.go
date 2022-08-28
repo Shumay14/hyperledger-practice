@@ -87,7 +87,10 @@ func (s *SmartContract) AssetExists(ctx contractapi.TransactionContextInterface,
 	return esgbondJSON != nil, nil
 }
 
-// CC functions for corporates
+/* 
+** CC functions for corporates
+*/
+
 // Issue new Bond
 func (s *SmartContract) IssueBond(ctx contractapi.TransactionContextInterface, issuers string, maxissuersnum int, bondnum int, maxbondnum int,
 	facevalue int, presentvalue int, discountrate int, issuedate string, maturity int, investor string) error {
@@ -119,21 +122,24 @@ func (s *SmartContract) IssueBond(ctx contractapi.TransactionContextInterface, i
 }
 
 // Delete Bond and Transfer Asset as much as amount of the bond.
-func (s *SmartContract) RedeemBond(ctx contractapi, TransactionContextInterface, ID string, Owner string) {
+func (s *SmartContract) RedeemBond(ctx contractapi, TransactionContextInterface, id string) {
+	esgbond, err := s.AssetExists(ctx, id)
+	if err != nil {
+		return err
+	}
+	if !exists {
+		return fmt.Errorf("the asset %s does not exist", id)
+	}
 
-	return
+	return ctx.GetStub().DelState(id)
 }
-
 
 // func (s *SmartContract) ReceivableBondOffering(ctx contractapi.TransactionContextInterface)
 
 
-// CC functions for investors
-
-// func (s *SmartContract) DepositAsset(ctx contractapi.TransactionContextInterface) {}
-
-// func (s *SmartContract) WithdrawAsset(ctx contractapi.TransactionContextInterface) {}
-
+/*
+** CC functions for investors
+*/
 func (s *SmartContract) ReadAsset(ctx contractapi.TransactionContextInterface, id string) (*esgbond, error) {
 	esgbondJSON, err := ctx.GetStub().GetState(id)
 	if err != nil {
@@ -168,8 +174,10 @@ func (s *SmartContract) TransferAsset(ctx contractapi.TransactionContextInterfac
 	}
 
 	return exOwner, nil
-	
 }
+
+// func (s *SmartContract) DepositAsset(ctx contractapi.TransactionContextInterface) {}
+// func (s *SmartContract) WithdrawAsset(ctx contractapi.TransactionContextInterface) {}
 
 
 // ListAllBonds returns all esgbonds found in worldstate
