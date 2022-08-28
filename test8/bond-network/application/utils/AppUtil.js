@@ -11,10 +11,12 @@ exports.buildCCPOrderer = () => {
     "ccp",
     "connection-orderer.json"
   );
+
   const fileExists = fs.existsSync(ccpPath); // boolean return
   if (!fileExists) {
     throw new Error(`no such file or directory: ${ccpPath}`);
   }
+
   const contents = fs.readFileSync(ccpPath, "utf-8");
 
   // build a JSON object from the file contents

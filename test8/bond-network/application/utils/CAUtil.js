@@ -6,10 +6,8 @@
  *
  **/
 
-const FabricCAServices = require("fabric-ca-client");
-
 // CA Client Object build
-exports.buildCAClient = (FavricCAServices, ccp, caHostName) => {
+exports.buildCAClient = (FabricCAServices, ccp, caHostName) => {
   // Create a new CA client for interacting with the CA.
   // lookup CA details from config
   const caInfo = ccp.certificateAuthorities[caHostName];
@@ -69,7 +67,7 @@ exports.registerAndEnrollUser = async (
   caClient,
   wallet,
   orgMspId,
-  amdinUserId,
+  adminUserId,
   userId,
   affiliation
 ) => {
@@ -82,6 +80,7 @@ exports.registerAndEnrollUser = async (
       );
       return;
     }
+
     // Must use a admin to register a new User
     const adminIdentity = await wallet.get(adminUserId);
     if (!adminIdentity) {
@@ -96,6 +95,7 @@ exports.registerAndEnrollUser = async (
     const provider = wallet
       .getProviderRegistry()
       .getProvider(adminIdentity.type);
+
     // Admin User
     const adminUser = await provider.getUserContext(adminIdentity, adminUserId);
 
