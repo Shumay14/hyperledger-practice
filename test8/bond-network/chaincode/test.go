@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-
+	"strconv"
 	// "github.com/hyperledger/fabric/core/chaincode/shim"
 	// "github.com/hyperledger/fabric/protos/peer"
 
@@ -22,7 +22,9 @@ type QueryAllBonds struct {
 // Define Data Structure
 // describes ESGBond details
 type ESGBond struct {
-	Issuers       string `json:"issuers"`
+	ID:			  string `json:"id"`
+	Owner:		  string `json:"owner"`
+	Issuer        string `json:"issuers"`
 	Purpose       string `json:"purpose"`
 	MaxIssuersNum int    `json:"maxissuersnum"`
 	BondNum       int    `json:"bondnum"`
@@ -32,7 +34,7 @@ type ESGBond struct {
 	DiscountRate  int    `json:"discountrate"`
 	IssueDate     string `json:"issuedate"`
 	Maturity      int    `json:"maturity"`
-	Investor      string `json:"investor"`
+	// Investor      string `json:"investor"`
 }
 
 // describes Corporate details
@@ -54,9 +56,9 @@ type Investor struct {
 // why is it here? just for test? or check?
 func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) error {
 	esgbonds := []ESGBond{
-		{Issuers: "Samsung", MaxIssuersNum: 5, BondNum: 1, MaxBondNum: 100, FaceValue: 10000, PresentValue: 9000, DiscountRate: 10, IssueDate: "2022-01-01", Maturity: 1, Investor: "sjy"},
-		{Issuers: "SK", MaxIssuersNum: 5, BondNum: 2, MaxBondNum: 100, FaceValue: 10000, PresentValue: 9000, DiscountRate: 10, IssueDate: "2022-01-01", Maturity: 1, Investor: "sjy"},
-		{Issuers: "Hyundai", MaxIssuersNum: 5, BondNum: 3, MaxBondNum: 100, FaceValue: 10000, PresentValue: 9000, DiscountRate: 10, IssueDate: "2022-01-01", Maturity: 1, Investor: "sjy"},
+		{Issuer: "Samsung", MaxIssuersNum: 5, BondNum: 1, MaxBondNum: 100, FaceValue: 10000, PresentValue: 9000, DiscountRate: 10, IssueDate: "2022-01-01", Maturity: 1, Investor: "sjy"},
+		{Issuer: "SK", MaxIssuersNum: 5, BondNum: 2, MaxBondNum: 100, FaceValue: 10000, PresentValue: 9000, DiscountRate: 10, IssueDate: "2022-01-01", Maturity: 1, Investor: "sjy"},
+		{Issuer: "Hyundai", MaxIssuersNum: 5, BondNum: 3, MaxBondNum: 100, FaceValue: 10000, PresentValue: 9000, DiscountRate: 10, IssueDate: "2022-01-01", Maturity: 1, Investor: "sjy"},
 	}
 
 	// _ index 안받음
@@ -88,9 +90,13 @@ func (s *SmartContract) IssueBond(ctx contractapi.TransactionContextInterface, i
 	// if exists {
 	// 	return fmt.Errorf("the asset %s already exists", id)
 	// }
-
+	
+	// parameters 10
 	esgbond := ESGBond{
-		Issuers:       issuers,
+		ID:			   id,
+		Owner:		   owner,	
+		// Investor:      investor,	
+		Issuer:        issuer,
 		MaxIssuersNum: maxissuersnum,
 		BondNum:       bondnum,
 		MaxBondNum:    maxbondnum,
@@ -99,9 +105,10 @@ func (s *SmartContract) IssueBond(ctx contractapi.TransactionContextInterface, i
 		DiscountRate:  discountrate,
 		IssueDate:     issuedate,
 		Maturity:      maturity,
-		Investor:      investor,
+		
 	}
 
+	// convert to JSON type 
 	esgbondJSON, err := json.Marshal(esgbond)
 	if err != nil {
 		return err
@@ -120,11 +127,31 @@ func (s *SmartContract) IssueBond(ctx contractapi.TransactionContextInterface, i
 // CC functions for investors
 // func (s *SmartContract) DepositAsset(ctx contractapi.TransactionContextInterface) {}
 
-// func (s *SmartContract) TransferAsset(ctx contractapi.TransactionContextInterface) {}
-
 // func (s *SmartContract) WithdrawAsset(ctx contractapi.TransactionContextInterface) {}
 
-// func (s *SmartContract) ReadAsset(ctx contractapi.TransactionContextInterface) {}
+func (s *SmartContract) ReadAsset(ctx contractapi.TransactionContextInterface, id string) (*esgbond, error) {
+	esgbondJSON, err := ctx.GetStub().GetState(id)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read from world state: %v", err)
+	}
+	if esgbondJSON == nil {
+		return nil, fmt.Errorf("the asset %s does not exist", id)
+	}
+
+	var esgbond ESGBond
+	err = json.Unmarshal(esgbondJSON, &esgbond)
+	if err != nil {
+		return nil, err
+	}
+
+	return &esgbond, nil
+}
+
+
+func (s *SmartContract) TransferAsset(ctx contractapi.TransactionContextInterface, id string, newOwner string ) (string, error) {
+	
+}
+
 
 // QueryAllBonds returns all esg bonds found in worldstate
 func (s *SmartContract) ListAllBonds(ctx contractapi.TransactionContextInterface) ([]*ESGBond, error) {
