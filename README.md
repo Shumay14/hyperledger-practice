@@ -37,7 +37,7 @@ $> git push
 
 # JQuery
 
-# Envirment Variable setting
+# Environment Variable setting
 
 (MacOS) X-code
 
