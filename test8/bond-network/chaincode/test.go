@@ -83,14 +83,6 @@ func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) 
 // Issue new Bond
 func (s *SmartContract) IssueBond(ctx contractapi.TransactionContextInterface, issuers string, maxissuersnum int, bondnum int, maxbondnum int,
 	facevalue int, presentvalue int, discountrate int, issuedate string, maturity int, investor string) error {
-	// exists, err := s.AssetExists(ctx, id)
-	// if err != nil {
-	// 	return err
-	// }
-	// if exists {
-	// 	return fmt.Errorf("the asset %s already exists", id)
-	// }
-	
 	// parameters 10
 	esgbond := ESGBond{
 		ID:			   id,
@@ -118,13 +110,17 @@ func (s *SmartContract) IssueBond(ctx contractapi.TransactionContextInterface, i
 
 }
 
-// func (s *SmartContract) RedeemBond(ctx contractapi, TransactionContextInterface, BondNum int, OwnedInvestor string) {
-// 	return
-// }
+// Delete Bond and Transfer Asset as much as amount of the bond.
+func (s *SmartContract) RedeemBond(ctx contractapi, TransactionContextInterface, ID string, Owner string) {
+
+	return
+}
 
 // func (s *SmartContract) ReceivableBondOffering(ctx contractapi.TransactionContextInterface)
 
+
 // CC functions for investors
+
 // func (s *SmartContract) DepositAsset(ctx contractapi.TransactionContextInterface) {}
 
 // func (s *SmartContract) WithdrawAsset(ctx contractapi.TransactionContextInterface) {}
@@ -147,15 +143,28 @@ func (s *SmartContract) ReadAsset(ctx contractapi.TransactionContextInterface, i
 	return &esgbond, nil
 }
 
-
+// TransferAsset is to change owner field of esgbond with given id in worldstate, and return the ex-owner.
 func (s *SmartContract) TransferAsset(ctx contractapi.TransactionContextInterface, id string, newOwner string ) (string, error) {
+	esgbond, err := s.ReadAsset(ctx, id)
+	if err != nil {
+		return "Error!", err
+	}
+
+	exOwner := esgbond.Owner
+	esgbond.Owner = newOwner
+
+	esgbondJSON, err := json.Marshal(esgbond)
+	if err != nil {
+		return "Error!", err
+	}
+
+	return exOwner, nil
 	
 }
 
 
-// QueryAllBonds returns all esg bonds found in worldstate
+// ListAllBonds returns all esgbonds found in worldstate
 func (s *SmartContract) ListAllBonds(ctx contractapi.TransactionContextInterface) ([]*ESGBond, error) {
-
 	// range query with empty string for startKey and endKey does an
 	// open-ended query of all assets in the chaincode namespace.
 	resultsIterator, err := ctx.GetStub().GetStateByRange("", "")
@@ -178,6 +187,8 @@ func (s *SmartContract) ListAllBonds(ctx contractapi.TransactionContextInterface
 	return esgbonds, nil
 }
 
+
+// main function
 func main() {
 
 	chaincode, err := contractapi.NewChaincode(new(SmartContract))
