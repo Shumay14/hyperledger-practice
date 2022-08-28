@@ -1,4 +1,5 @@
 "use strict";
+// import module
 const express = require("express");
 const path = require("path");
 const fs = require("fs =");
@@ -6,6 +7,11 @@ const fs = require("fs =");
 const FabricCAServices = require("fabric-service-client");
 const { Geteway, Wallets } = require("fabric-network");
 // const bodyParser = require("body-parser");
+
+// import Utils
+const {buildCAClient, registerAndEnrollUser, enrollAdnmin} = require("./utils/CAUtil.js");
+
+
 
 // connection.json object
 const ccpPath = path.resolve(__dirname, "ccp", "connection-orderer.json");
@@ -26,6 +32,7 @@ const walletPath = path.join(__dirname, "wallet");
 const appUserId = "appUser";
 
 function jsonString(inputString) {
+    // stringigy(value, replace, space)
   return JSON.stringify(JSON.parse(inputString), null, 2);
 }
 

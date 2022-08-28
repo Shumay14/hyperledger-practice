@@ -24,7 +24,84 @@ app.use(express.static(path.join(__dirname, "views")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// 4. REST api Routing
+/*
+ * 4. REST API ROUTING
+ * GET ROUTING - /asset
+ * POST ROUTING - /admin, /user, /bond, /transfer
+ */
+
+// GET ROUTING
+// 4.2. /asset GET (자산조회)
+app.get("/asset", async (req, res) => {
+  const cert = req.query.cert;
+  const id = req.query.id;
+  console.log("/asset-get-", +id);
+
+  // Create a new file systme based wallet for managing identitiies.
+  const walletPath = path.join(process.cwd(), "wallet");
+  const wallet = await Wallets.newFileSystemWallet(walletPath);
+  console.log(`Waleet path: ${walletPath}`);
+
+  // Check to see if we've already enrolled the admin user.
+  const identity = await wallet.get(cert);
+  if (!identity) {
+    console.log(`An identitiy for the user does not exists in the wallet`);
+    const res_str = `{"result": "failed", "msg": "An identity for the user does not exists in the wallet"}`;
+    res.json(JSON.parse(res_str));
+    return;
+  }
+
+  // Create a new gateway for connecting to our peer node.
+  gateway = new Gateway();
+  await gateway.connect(ccp, {
+    wallet,
+    identity: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
+
+  // Get the network (channel) our contract is deployed to.
+  network = await gateway.getNetwork("bondsystem");
+
+  // Get the contract from the network.
+  contract = network.getContract("bondsys");
+
+  // Submit the specified transaction.
+  console.log(
+    `\n--> Evaluate Transaction: BondList, function returns "${bondnum} attributes`
+  );
+  result = await contract.evaluateTransaction("BondList", bondnum);
+
+  // response -> client
+  await gateway.disconnect();
+  res_str = `{"result": "success", "msg": ${result}}`;
+  res.status(200).json(JSON.parse(res_str));
+
+  // Create a new gateway for connecting to our peer node.
+  const gateway = new Gateway();
+  await gateway.connect(ccp, {
+    wallet,
+    identitiy: cert,
+    discovery: { enabled: true, asLocalhost: true },
+  });
+
+  // Get the network (channel) our contract is deployed to.
+  const network = await gateway.getNetwork("bondsystem");
+
+  // Get the contract from the network.
+  const contract = network.getContract("bondsys");
+
+  // Submit the specified transaction.
+  console.log(
+    `\n--> Evaluate Transaction: BondList, function returns "${bondnum}" attributes`
+  );
+  result = await contract.evaluateTransaction("BondList", id);
+
+  // response -> client
+  await gateway.disconnect();
+  const res_str = `{"result": "success", "msg": ${result}}`;
+  res.status(200).json(JSON.parse(res_str));
+});
+
 //// POST 라우팅
 //// 4.0.1 /admin POST 라우팅 (id, password)
 app.post("/admin", async (req, res) => {
@@ -86,9 +163,6 @@ app.post("/admin", async (req, res) => {
     res.json(JSON.parse(res_str));
   }
 });
-
-// CODING TABLE
-// POST ROUTING
 
 //// 4.0.2 /user POST ROUTING (id , userrole)
 //// 기업이나 투자자로 바꿔야함
@@ -255,78 +329,6 @@ app.post("/bond", async (req, res) => {
     "<dir><p>Transaction(IssueBond) has been submitted</p></div>"
   );
   res.status(200).send(resultHTML);
-});
-
-// GET ROUTING
-// 4.2. /asset GET (자산조회)
-app.get("/asset", async (req, res) => {
-  const cert = req.query.cert;
-  const id = req.query.id;
-  console.log("/asset-get-", +id);
-
-  // Create a new file systme based wallet for managing identitiies.
-  const walletPath = path.join(process.cwd(), "wallet");
-  const wallet = await Wallets.newFileSystemWallet(walletPath);
-  console.log(`Waleet path: ${walletPath}`);
-
-  // Check to see if we've already enrolled the admin user.
-  const identity = await wallet.get(cert);
-  if (!identity) {
-    console.log(`An identitiy for the user does not exists in the wallet`);
-    const res_str = `{"result": "failed", "msg": "An identity for the user does not exists in the wallet"}`;
-    res.json(JSON.parse(res_str));
-    return;
-  }
-
-  // Create a new gateway for connecting to our peer node.
-  gateway = new Gateway();
-  await gateway.connect(ccp, {
-    wallet,
-    identity: cert,
-    discovery: { enabled: true, asLocalhost: true },
-  });
-
-  // Get the network (channel) our contract is deployed to.
-  network = await gateway.getNetwork("bondsystem");
-
-  // Get the contract from the network.
-  contract = network.getContract("bondsys");
-
-  // Submit the specified transaction.
-  console.log(
-    `\n--> Evaluate Transaction: BondList, function returns "${bondnum} attributes`
-  );
-  result = await contract.evaluateTransaction("BondList", bondnum);
-
-  // response -> client
-  await gateway.disconnect();
-  res_str = `{"result": "success", "msg": ${result}}`;
-  res.status(200).json(JSON.parse(res_str));
-
-  // Create a new gateway for connecting to our peer node.
-  const gateway = new Gateway();
-  await gateway.connect(ccp, {
-    wallet,
-    identitiy: cert,
-    discovery: { enabled: true, asLocalhost: true },
-  });
-
-  // Get the network (channel) our contract is deployed to.
-  const network = await gateway.getNetwork("bondsystem");
-
-  // Get the contract from the network.
-  const contract = network.getContract("bondsys");
-
-  // Submit the specified transaction.
-  console.log(
-    `\n--> Evaluate Transaction: BondList, function returns "${bondnum}" attributes`
-  );
-  result = await contract.evaluateTransaction("BondList", id);
-
-  // response -> client
-  await gateway.disconnect();
-  const res_str = `{"result": "success", "msg": ${result}}`;
-  res.status(200).json(JSON.parse(res_str));
 });
 
 // 4.6. /transferasset POST
