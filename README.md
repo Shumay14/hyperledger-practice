@@ -21,8 +21,7 @@ $> git push -u origin main
 ```
 
 ```sh
-$> git config --global core.editor vi
-
+$> git config --global core.editor vi or gedit
 ```
 
 ```sh
