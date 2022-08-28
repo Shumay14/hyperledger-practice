@@ -73,10 +73,18 @@ func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) 
 			// Errorf 에러 스트링 객체로 만들어줌
 			return fmt.Errorf("failed to put to world state. %v", err.Error())
 		}
-
 	}
 	return nil
+}
 
+// AssetExists return true when asset with given ID exists in world state.
+func (s *SmartContract) AssetExists(ctx contractapi.TransactionContextInterface, id string) (bool, error) {
+	esgbondJSON, err := ctx.GetStub().GetState(id)
+	if err != nil {
+		return false, fmt.Errorf("failed to read from world state: %v", err)
+	}
+
+	return esgbondJSON != nil, nil
 }
 
 // CC functions for corporates
@@ -115,6 +123,7 @@ func (s *SmartContract) RedeemBond(ctx contractapi, TransactionContextInterface,
 
 	return
 }
+
 
 // func (s *SmartContract) ReceivableBondOffering(ctx contractapi.TransactionContextInterface)
 
