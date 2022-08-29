@@ -25,7 +25,7 @@
       <input type="text" id="id" class="form-control" />
       <br /><br />
       <button class="btn btn-primary" id="btn-read">자산조회</button>
-      <button class="btn btn-warning" id="btn-readall">모든자산조회</button>
+      <!-- <button class="btn btn-warning" id="btn-readall">모든자산조회</button>s -->
       <!-- </form> -->
     </div>
     <br />
@@ -60,8 +60,9 @@
         $("#result").append("<p>BondNum : " + obj.owner + "</p>");
         $("#result").append("<p>MaxBondNum : " + obj.owner + "</p>");
         $("#result").append("<p>FaceValue : " + obj.owner + "</p>");
-        $("#result").append("<p>소유주 : " + obj.owner + "</p>");
-        $("#result").append("<p>소유주 : " + obj.owner + "</p>");
+        $("#result").append("<p>PresentValue : " + obj.owner + "</p>");
+        $("#result").append("<p>DiscountRate : " + obj.owner + "</p>");
+        $("#result").append("<p>자산값 : " + obj.appraisedValue + "</p>");
         $("#result").append("<p>자산값 : " + obj.appraisedValue + "</p>");
       });
     });
