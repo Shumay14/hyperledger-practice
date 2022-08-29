@@ -9,7 +9,7 @@ const FabricCAServices = require("fabric-ca-client");
 const { Gateway, Wallets } = require("fabric-network");
 
 // 2. connection.json 객체화
-const ccpPath = path.resolve(__dirname, "ccp", "connection-orderer.json");
+const ccpPath = path.resolve(__dirname, "ccp", "connection-org1.json");
 const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf-8"));
 
 // 3. 서버 설정
@@ -112,8 +112,8 @@ app.post("/admin", async (req, res) => {
 
   try {
     // Create a new CA client for interacting with the CA.
-    const caInfo = ccp.certificateAuthorities["ca.orderer.example.com"];
-    const caTLSCACerts = caInfo.caTLSCACerts.pem;
+    const caInfo = ccp.certificateAuthorities["ca.org1.example.com"];
+    const caTLSCACerts = caInfo.tlsCACerts.pem;
     const ca = new FabricCAServices(
       caInfo.url,
       { trustedRoots: caTLSCACerts, verify: false },
@@ -174,8 +174,8 @@ app.post("/user", async (req, res) => {
 
   try {
     // Create a new CA client for interacting with the CA.
-    const caInfo = ccp.certificateAuthorities["ca.orderer.example.com"];
-    const caTLSCACerts = caInfo.caTLSCACerts.pem;
+    const caInfo = ccp.certificateAuthorities["ca.org1.example.com"];
+    const caTLSCACerts = caInfo.tlsCACerts.pem;
     const ca = new FabricCAServices(
       caInfo.url,
       { trustedRoots: caTLSCACerts, verify: false },
@@ -218,6 +218,7 @@ app.post("/user", async (req, res) => {
     // Register the user, enroll the user, and import the new identity into the wallet.
     const secret = await ca.register(
       {
+        affiliation: "org1.department1",
         enrollmentID: id,
         role: userrole,
       },
@@ -253,7 +254,7 @@ app.post("/user", async (req, res) => {
 
 //// 4.1.0 /bond POST (채권 생성)
 app.post("/bond", async (req, res) => {
-  const cert = req.body.cert;
+  // // const cert = req.body.cert;
   const issuers = req.body.issuers;
   const maxissuersnum = req.body.maxissuersnum;
   const bondnum = req.body.bondnum;
@@ -285,50 +286,112 @@ app.post("/bond", async (req, res) => {
       ":"
   );
 
-  // Create a new file system based wallet for managing identities.
-  const walletPath = path.join(process.cwd(), "wallet");
-  const wallet = await Wallets.newFileSystemWallet(walletPath);
-  console.log(`Wallet path: ${walletPath}`);
+  // try {
+  //       // Create a new file system based wallet for managing identities.
+  //     const walletPath = path.join(process.cwd(), "wallet");
+  //     const wallet = await Wallets.newFileSystemWallet(walletPath);
+  //     console.log(`Wallet path: ${walletPath}`);
+      
 
-  // Check to see if we've already enrolled the admin user.
-  const identity = await wallet.get(cert);
-  if (!identity) {
-    console.log(`An identity for the user does not exists in the wallet`);
-    const res_str = `{"result":"failed","msg":"An identity for the user does not exists in the wallet"}`;
-    res.json(JSON.parse(res_str));
-    return;
+  //     // Check to see if we've already enrolled the admin user.
+  //     const identity = await wallet.get("seo2");
+  //     if (!identity) {
+  //       console.log(`An identity for the user does not exists in the wallet`);
+  //       const res_str = `{"result":"failed","msg":"An identity for the user does not exists in the wallet"}`;
+  //       res.json(JSON.parse(res_str));
+  //       return;
+  //     }
+
+  //     // Create a new gateway for connecting to our peer node.
+  //     const gateway = new Gateway();
+  //     await gateway.connect(ccp, {
+  //       wallet,
+  //       identitiy: "seo2",
+  //       discovery: { enabled: true, asLocalhost: true },
+  //     });
+
+      
+
+  //     // Get the network (channel) our contract is deployed to.
+  //     const network = await gateway.getNetwork("bondsystem");
+
+  //     // Get the contract from the network.
+  //     const contract = network.getContract("bondsys");
+
+  //     // Submit the specified transaction.
+  //     console.log(
+  //       "\n--> Submit Transaction: IssueBond, issue new bond with issuers, maxissuersnum, bondnum, maxbondnum, and etc. arguments"
+  //     );
+  //     await contract.submitTransaction();
+  //     console.log("Transaction(IssueBond) has been submitted");
+
+  //     // response - client
+  //     await gateway.disconnect();
+  //     const resultPath = path.join(process.cwd(), "/views/result.html");
+  //     var resultHTML = fs.readFileSync(resultPaht, "utf-8");
+  //     resultHTML = resultHTML.replace(
+  //       "<dir></dir>",
+  //       "<dir><p>Transaction(IssueBond) has been submitted</p></div>"
+  //     );
+  //     res.status(200).send(resultHTML);
+    
+  // } catch (error) {
+
+  //   console.log("err :" + error)
+    
+  // }
+
+  try {
+    // load the network configuration
+    const ccpPath = path.resolve(__dirname, "ccp", "connection-org1.json");
+    const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf-8"));
+
+    // Create a new file system based wallet for managing identities.
+    const walletPath = path.join(process.cwd(), "wallet");
+    const wallet = await Wallets.newFileSystemWallet(walletPath);
+    console.log(`Wallet path: ${walletPath}`);
+
+    // Check to see if we've already enrolled the user.
+    const identity = await wallet.get("seo2");
+    if (!identity) {
+        console.log(
+            'An identity for the user "appUser" does not exist in the wallet'
+        );
+        console.log("Run the registerUser.js application before retrying");
+        return;
+    }
+
+    // Create a new gateway for connecting to our peer node.
+    const gateway = new Gateway();
+    await gateway.connect(ccp, {
+        wallet,
+        identity: "seo2",
+        discovery: { enabled: true, asLocalhost: true },
+    });
+
+
+
+    // Get the network (channel) our contract is deployed to.
+    const network = await gateway.getNetwork("bondsystem");
+
+    // Get the contract from the network.
+    const contract = network.getContract("bondsys");
+
+    // Submit the specified transaction.
+    // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
+    // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR12', 'Dave')
+    await contract.submitTransaction();
+    console.log("Transaction has been submitted");
+
+    // Disconnect from the gateway.
+    await gateway.disconnect();
+  } catch (error) {
+      console.error(`Failed to submit transaction: ${error}`);
+      process.exit(1);
   }
 
-  // Create a new gateway for connecting to our peer node.
-  const gateway = new Gateway();
-  await gateway.connect(ccp, {
-    wallet,
-    identitiy: cert,
-    discovery: { enabled: true, asLocalhost: true },
-  });
 
-  // Get the network (channel) our contract is deployed to.
-  const network = await gateway.getNetwork("bondsystem");
-
-  // Get the contract from the network.
-  const contract = network.getContract("bondsys");
-
-  // Submit the specified transaction.
-  console.log(
-    "\n--> Submit Transaction: IssueBond, issue new bond with issuers, maxissuersnum, bondnum, maxbondnum, and etc. arguments"
-  );
-  await contract.submitTransaction();
-  console.log("Transaction(IssueBond) has been submitted");
-
-  // response - client
-  await gateway.disconnect();
-  const resultPath = path.join(process.cwd(), "/views/result.html");
-  var resultHTML = fs.readFileSync(resultPaht, "utf-8");
-  resultHTML = resultHTML.replace(
-    "<dir></dir>",
-    "<dir><p>Transaction(IssueBond) has been submitted</p></div>"
-  );
-  res.status(200).send(resultHTML);
+  
 });
 
 // 4.6. /transferasset POST

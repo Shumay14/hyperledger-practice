@@ -12,17 +12,16 @@ const { Geteway, Wallets } = require("fabric-network");
 const { buildCAClient, registerAndEnrollUser, enrollAdmin } = require("./utils/CAUtil.js");
 const { buildCCPOrderer, buildWallet } = require("./AppUtil.js");
 
-
 // connection.json object
 const ccpPath = path.resolve(__dirname, "ccp", "connection-orderer.json");
 const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf8"));
 
-//
+// app.
 app.use(express.static(path.join(__dirname, "views")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// set..
+// set...
 const channelName = "bondsystem";
 const chaincodeName = "bondsystem";
 const mspOrderer = "OrdererMSP";
@@ -43,8 +42,6 @@ app.get("/", (req, res) => {
 });
 
 
-
-
 // ROUTING POST
 // /admin POST ROUTING (id, password)
 app.post("/admin", async (req, res) => {
@@ -59,7 +56,6 @@ app.post("/admin", async (req, res) => {
         const caTLSCACerts = caInfo.caTLSCACerts.pem;
         const ca = new FabricCAServices(
             caInfo.url, {trustedRoots: caTLSCACerts, verify: false}, caInfo.caName
-
         );
     }
 });
@@ -67,4 +63,4 @@ app.post("/admin", async (req, res) => {
 // Let's try a query type operation (function).
 // This will be sent to just one peer and the results will be shown
 
-module.exports = app;
+// module.exports = app;
