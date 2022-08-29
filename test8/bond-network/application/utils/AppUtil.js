@@ -40,6 +40,8 @@ exports.buildWallet = async (Wallets, walletPath) => {
 
 exports.JSONString = (inputString) => {
   if (inputString) {
+    return JSON.stringify(JSON.parse(inputString), null, 2);
+  } else {
     return inputString;
   }
 };

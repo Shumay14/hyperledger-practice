@@ -2,15 +2,15 @@
 // import module
 const express = require("express");
 const path = require("path");
-const fs = require("fs =");
+const fs = require("fs");
 
 const FabricCAServices = require("fabric-service-client");
 const { Geteway, Wallets } = require("fabric-network");
 // const bodyParser = require("body-parser");
 
 // import Utils
-const {buildCAClient, registerAndEnrollUser, enrollAdnmin} = require("./utils/CAUtil.js");
-
+const { buildCAClient, registerAndEnrollUser, enrollAdmin } = require("./utils/CAUtil.js");
+const { buildCCPOrderer, buildWallet } = require("./AppUtil.js");
 
 
 // connection.json object
@@ -23,15 +23,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // set..
-const channelName = "mychannel";
-const chaincodeNmae = "bondsystem";
+const channelName = "bondsystem";
+const chaincodeName = "bondsystem";
 const mspOrderer = "OrdererMSP";
 const adminUserId = "admin";
 const adminPasswd = "adminpw";
 const walletPath = path.join(__dirname, "wallet");
 const appUserId = "appUser";
 
-function jsonString(inputString) {
+function JSONString(inputString) {
     // stringigy(value, replace, space)
   return JSON.stringify(JSON.parse(inputString), null, 2);
 }
