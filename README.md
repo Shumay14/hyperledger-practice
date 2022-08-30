@@ -27,7 +27,8 @@ $> git config --global core.editor vi or gedit
 
 ```sh
 $> git add --all or $> git add .
-$> git commit -m "blahblah message"
+$> git commit -m "blahblah message"![bondtradingsys](https://user-images.githubusercontent.com/86043952/187393014-6dc7b2aa-0af8-45d4-94d0-687cfa8e24a6.png)
+
 $> git push
 ```
 
@@ -44,3 +45,7 @@ $> git push
 ```
 
 ```
+![bondtradingsys](https://user-images.githubusercontent.com/86043952/187393198-e6215069-609b-483f-93d6-6ef7891974fe.png)
+
+
+
